@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useGameSocket } from '@/lib/game/useGameSocket';
 import Link from 'next/link';
@@ -14,20 +14,24 @@ export default function VSLobbyPage() {
 
   const handleCreate = () => {
     if (!playerName.trim()) return;
+    localStorage.setItem('ua-player-name', playerName.trim());
     createRoom(playerName.trim());
     setMode('create');
   };
 
   const handleJoin = () => {
     if (!playerName.trim() || !joinCode.trim()) return;
+    localStorage.setItem('ua-player-name', playerName.trim());
     joinRoom(joinCode.trim(), playerName.trim());
     setMode('join');
   };
 
-  // Navigate to room when we get a room code and an opponent joins
-  if (roomCode && (roomPhase === 'deck_select' || roomPhase === 'in_game')) {
-    router.push(`/vs/${roomCode}`);
-  }
+  // Navigate to room when we get a room code and transition to deck_select or in_game
+  useEffect(() => {
+    if (roomCode && (roomPhase === 'deck_select' || roomPhase === 'in_game')) {
+      router.push(`/vs/${roomCode}`);
+    }
+  }, [roomCode, roomPhase, router]);
 
   return (
     <div className="min-h-[calc(100vh-8rem)] flex items-center justify-center px-4">

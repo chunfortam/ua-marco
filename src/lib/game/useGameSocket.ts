@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import type {
   ClientMessage,
   ServerMessage,
@@ -10,7 +10,7 @@ import type {
   RoomPhase,
 } from './types';
 
-interface UseGameSocketReturn {
+interface GameSocketState {
   connectionState: ConnectionState;
   roomCode: string | null;
   playerId: string | null;
@@ -28,11 +28,29 @@ interface UseGameSocketReturn {
   clearError: () => void;
 }
 
-const WS_URL = typeof window !== 'undefined'
-  ? `ws://${window.location.hostname}:3001`
-  : 'ws://localhost:3001';
+function getWsUrl(): string {
+  if (typeof window === 'undefined') return 'ws://localhost:3001';
+  const host = window.location.hostname;
+  if (host === 'localhost' || host === '127.0.0.1') {
+    return `ws://${host}:3001`;
+  }
+  const proto = window.location.protocol === 'https:' ? 'wss' : 'ws';
+  return `${proto}://${window.location.host}/ws`;
+}
 
-export function useGameSocket(): UseGameSocketReturn {
+const WS_URL = getWsUrl();
+
+export const GameSocketContext = createContext<GameSocketState | null>(null);
+
+export function useGameSocket(): GameSocketState {
+  const ctx = useContext(GameSocketContext);
+  if (!ctx) {
+    throw new Error('useGameSocket must be used within a GameSocketProvider');
+  }
+  return ctx;
+}
+
+export function useGameSocketProvider(): GameSocketState {
   const wsRef = useRef<WebSocket | null>(null);
   const [connectionState, setConnectionState] = useState<ConnectionState>('disconnected');
   const [roomCode, setRoomCode] = useState<string | null>(null);
@@ -43,39 +61,6 @@ export function useGameSocket(): UseGameSocketReturn {
   const [opponentReady, setOpponentReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [events, setEvents] = useState<ServerMessage[]>([]);
-
-  const connect = useCallback(() => {
-    if (wsRef.current?.readyState === WebSocket.OPEN) return;
-
-    setConnectionState('connecting');
-    const ws = new WebSocket(WS_URL);
-
-    ws.onopen = () => {
-      setConnectionState('connected');
-      setError(null);
-    };
-
-    ws.onclose = () => {
-      setConnectionState('disconnected');
-      wsRef.current = null;
-    };
-
-    ws.onerror = () => {
-      setConnectionState('error');
-      setError('Connection to game server failed');
-    };
-
-    ws.onmessage = (event) => {
-      try {
-        const msg: ServerMessage = JSON.parse(event.data);
-        handleMessage(msg);
-      } catch {
-        // ignore invalid messages
-      }
-    };
-
-    wsRef.current = ws;
-  }, []);
 
   const handleMessage = useCallback((msg: ServerMessage) => {
     setEvents((prev) => [...prev.slice(-99), msg]);
@@ -130,6 +115,40 @@ export function useGameSocket(): UseGameSocketReturn {
     }
   }, []);
 
+  const connect = useCallback(() => {
+    if (wsRef.current?.readyState === WebSocket.OPEN ||
+        wsRef.current?.readyState === WebSocket.CONNECTING) return;
+
+    setConnectionState('connecting');
+    const ws = new WebSocket(WS_URL);
+
+    ws.onopen = () => {
+      setConnectionState('connected');
+      setError(null);
+    };
+
+    ws.onclose = () => {
+      setConnectionState('disconnected');
+      wsRef.current = null;
+    };
+
+    ws.onerror = () => {
+      setConnectionState('error');
+      setError('Connection to game server failed');
+    };
+
+    ws.onmessage = (event) => {
+      try {
+        const msg: ServerMessage = JSON.parse(event.data);
+        handleMessage(msg);
+      } catch {
+        // ignore invalid messages
+      }
+    };
+
+    wsRef.current = ws;
+  }, [handleMessage]);
+
   const send = useCallback((msg: ClientMessage) => {
     if (wsRef.current?.readyState === WebSocket.OPEN) {
       wsRef.current.send(JSON.stringify(msg));
@@ -138,7 +157,6 @@ export function useGameSocket(): UseGameSocketReturn {
 
   const createRoom = useCallback((playerName: string) => {
     connect();
-    // Wait for connection then send
     const interval = setInterval(() => {
       if (wsRef.current?.readyState === WebSocket.OPEN) {
         clearInterval(interval);

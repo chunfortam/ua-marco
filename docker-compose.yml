@@ -1,0 +1,18 @@
+services:
+  frontend:
+    build:
+      context: .
+      target: frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - gameserver
+    restart: unless-stopped
+
+  gameserver:
+    build:
+      context: .
+      target: gameserver
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
