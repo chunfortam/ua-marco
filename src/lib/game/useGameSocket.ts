@@ -39,6 +39,7 @@ function getWsUrl(): string {
 }
 
 const WS_URL = getWsUrl();
+console.log('[GameSocket] WS_URL:', WS_URL);
 
 export const GameSocketContext = createContext<GameSocketState | null>(null);
 
@@ -117,22 +118,29 @@ export function useGameSocketProvider(): GameSocketState {
 
   const connect = useCallback(() => {
     if (wsRef.current?.readyState === WebSocket.OPEN ||
-        wsRef.current?.readyState === WebSocket.CONNECTING) return;
+        wsRef.current?.readyState === WebSocket.CONNECTING) {
+      console.log('[GameSocket] Already connected/connecting, skipping');
+      return;
+    }
 
+    console.log('[GameSocket] Connecting to', WS_URL);
     setConnectionState('connecting');
     const ws = new WebSocket(WS_URL);
 
     ws.onopen = () => {
+      console.log('[GameSocket] Connected!');
       setConnectionState('connected');
       setError(null);
     };
 
-    ws.onclose = () => {
+    ws.onclose = (event) => {
+      console.log('[GameSocket] Closed:', event.code, event.reason);
       setConnectionState('disconnected');
       wsRef.current = null;
     };
 
-    ws.onerror = () => {
+    ws.onerror = (event) => {
+      console.error('[GameSocket] Error:', event);
       setConnectionState('error');
       setError('Connection to game server failed');
     };
@@ -194,8 +202,10 @@ export function useGameSocketProvider(): GameSocketState {
   }, []);
 
   useEffect(() => {
+    console.log('[GameSocket] Mount effect - calling connect()');
     connect();
     return () => {
+      console.log('[GameSocket] Cleanup - closing WebSocket');
       wsRef.current?.close();
     };
   }, [connect]);
