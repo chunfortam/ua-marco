@@ -37,6 +37,7 @@ export interface GameState {
   turn: number;
   phase: Phase;
   activePlayer: PlayerKey;
+  firstPlayer: PlayerKey;  // which player goes first (set after mulligan)
   firstTurnOfGame: boolean;
   winner: PlayerKey | null;
   winReason: string | null;
@@ -137,7 +138,7 @@ export type GameEvent =
   | { type: 'GAME_STARTED'; gameId: string }
   | { type: 'PHASE_CHANGED'; phase: Phase; activePlayer: PlayerKey; turn: number }
   | { type: 'CARD_DRAWN'; player: PlayerKey; card?: CardInstance }
-  | { type: 'EXTRA_DRAW_USED'; player: PlayerKey; lifeCard: CardInstance }
+  | { type: 'EXTRA_DRAW_USED'; player: PlayerKey }
   | { type: 'CARDS_MOVED_TO_FRONT'; player: PlayerKey; instanceIds: string[] }
   | { type: 'CARD_STEPPED_TO_ENERGY'; player: PlayerKey; instanceId: string }
   | { type: 'CARD_PLAYED'; player: PlayerKey; card: CardInstance; targetLine: string; replacedCard?: CardInstance }
@@ -180,6 +181,7 @@ export interface SanitizedGameState {
   turn: number;
   phase: Phase;
   activePlayer: PlayerKey;
+  firstPlayer: PlayerKey;
   firstTurnOfGame: boolean;
   winner: PlayerKey | null;
   winReason: string | null;

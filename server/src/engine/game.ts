@@ -33,25 +33,25 @@ export function createGame(
   const { result: shuffled2, nextCounter: c2 } = shuffleArray(deck2Instances, seed, counter);
   counter = c2;
 
-  // Draw opening hands (5 cards each)
-  const hand1 = shuffled1.splice(0, 5);
-  const hand2 = shuffled2.splice(0, 5);
+  // Draw opening hands (7 cards each per official rules)
+  const hand1 = shuffled1.splice(0, 7);
+  const hand2 = shuffled2.splice(0, 7);
 
-  // Set up life (7 cards each, face down from top of deck)
-  const life1 = shuffled1.splice(0, 7);
-  const life2 = shuffled2.splice(0, 7);
+  // Life area is set up AFTER mulligan (not here)
+  // Each player places 7 cards face-down from top of deck after mulligan
 
   const state: GameState = {
     id: gameId,
     turn: 0,
     phase: 'MULLIGAN',
     activePlayer: 'player1',
+    firstPlayer: 'player1',  // will be set after mulligan
     firstTurnOfGame: true,
     winner: null,
     winReason: null,
 
-    player1: createPlayerState(player1Id, shuffled1, hand1, life1),
-    player2: createPlayerState(player2Id, shuffled2, hand2, life2),
+    player1: createPlayerState(player1Id, shuffled1, hand1, []),
+    player2: createPlayerState(player2Id, shuffled2, hand2, []),
 
     pendingAction: { type: 'MULLIGAN_DECISION', player: 'player1' },
     actionLog: [],
@@ -77,7 +77,7 @@ function createPlayerState(
     energyLine: [],
     sidelineArea: [],
     removeArea: [],
-    ap: [{ active: true }, { active: true }, { active: true }],
+    ap: [],  // AP cards are placed progressively during the game, not at start
     extraDrawUsed: false,
     mulliganDone: false,
     attackedThisPhase: [],
@@ -156,13 +156,13 @@ function processMulligan(
     addLog(state, player, 'Kept opening hand');
     events.push({ type: 'MULLIGAN_RESULT', player, kept: true, newHandSize: ps.hand.length });
   } else {
-    // Shuffle hand back into deck, then draw 5 new cards
+    // Shuffle hand back into deck, then draw 7 new cards
     ps.deck.push(...ps.hand);
     ps.hand = [];
     const { result: shuffled, nextCounter } = shuffleArray(ps.deck, state.rngSeed, state.rngCounter);
     ps.deck = shuffled;
     state.rngCounter = nextCounter;
-    ps.hand = ps.deck.splice(0, 5);
+    ps.hand = ps.deck.splice(0, 7);
     ps.mulliganDone = true;
     addLog(state, player, 'Mulliganed hand');
     events.push({ type: 'MULLIGAN_RESULT', player, kept: false, newHandSize: ps.hand.length });
@@ -170,10 +170,15 @@ function processMulligan(
 
   // Check if both players have completed mulligan
   if (state.player1.mulliganDone && state.player2.mulliganDone) {
+    // Set up Life areas AFTER mulligan (7 cards each from top of deck)
+    state.player1.life = state.player1.deck.splice(0, 7);
+    state.player2.life = state.player2.deck.splice(0, 7);
+
     // Determine first player randomly
     const { result: order, nextCounter: nc } = shuffleArray(['player1', 'player2'] as PlayerKey[], state.rngSeed, state.rngCounter);
     state.rngCounter = nc;
     state.activePlayer = order[0];
+    state.firstPlayer = order[0];  // remember who goes first
     state.turn = 1;
     state.pendingAction = null;
 
@@ -195,10 +200,11 @@ function processMulligan(
 
 function beginStartPhase(state: GameState, events: GameEvent[]): void {
   const ps = getPlayerState(state, state.activePlayer);
+  const isFirstPlayer = state.activePlayer === (state.turn === 1 ? state.activePlayer : state.activePlayer);
 
   state.phase = 'START';
 
-  // Activate all characters and AP
+  // Activate all characters
   for (const card of ps.frontLine) {
     card.active = true;
     card.attacksRemaining = parseKeywords(getCardData(card.cardNumber)).doubleAttack ? 2 : 1;
@@ -212,34 +218,89 @@ function beginStartPhase(state: GameState, events: GameEvent[]): void {
     card.usedOncePerTurn = [];
     card.tempModifiers = card.tempModifiers.filter(m => m.expiresAt === 'PERMANENT');
   }
+
+  // Activate existing AP cards
   for (const ap of ps.ap) {
     ap.active = true;
   }
+
   ps.extraDrawUsed = false;
   ps.attackedThisPhase = [];
+
+  // --- AP Placement ---
+  // Player 1 (first): Turn 1 → 1 AP, Turn 2 → 2 AP, Turn 3+ → 3 AP (max)
+  // Player 2 (second): Turn 1 → 2 AP, Turn 2 → 2 AP (no new), Turn 3+ → 3 AP (max)
+  // Track using playerTurnNumber: how many turns THIS player has taken
+  const playerTurnNumber = getPlayerTurnNumber(state);
+  const isGoingFirst = isFirstGoingPlayer(state);
+
+  if (isGoingFirst) {
+    // P1: gets 1 new AP each turn until max 3
+    if (ps.ap.length < 3) {
+      ps.ap.push({ active: true });
+    }
+  } else {
+    // P2: gets 2 AP on turn 1, 0 on turn 2, then 1 per turn until max 3
+    if (playerTurnNumber === 1) {
+      // First turn for P2: place 2 AP
+      ps.ap.push({ active: true });
+      ps.ap.push({ active: true });
+    } else if (playerTurnNumber === 2) {
+      // Second turn for P2: no new AP (already got one in advance)
+    } else if (ps.ap.length < 3) {
+      // Turn 3+: add 1 AP if below max
+      ps.ap.push({ active: true });
+    }
+  }
 
   events.push({ type: 'CARDS_ACTIVATED', player: state.activePlayer });
   events.push({ type: 'AP_CHANGED', player: state.activePlayer, apStates: [...ps.ap] });
   events.push({ type: 'PHASE_CHANGED', phase: 'START', activePlayer: state.activePlayer, turn: state.turn });
 
-  // Draw 1 card (mandatory)
-  if (ps.deck.length === 0) {
-    // Deck out — this player loses
-    const winner = getOpponent(state.activePlayer);
-    state.winner = winner;
-    state.winReason = 'Opponent decked out';
-    events.push({ type: 'GAME_OVER', winner, reason: 'Opponent could not draw during Start Phase' });
-    return;
+  // --- Card Draw ---
+  // Player 1 does NOT draw on their first turn
+  // Player 2 DOES draw on their first turn
+  // All other turns: draw 1 card
+  const shouldDraw = !(isGoingFirst && playerTurnNumber === 1);
+
+  if (shouldDraw) {
+    if (ps.deck.length === 0) {
+      const winner = getOpponent(state.activePlayer);
+      state.winner = winner;
+      state.winReason = 'Opponent decked out';
+      events.push({ type: 'GAME_OVER', winner, reason: 'Opponent could not draw during Start Phase' });
+      return;
+    }
+
+    const drawnCard = ps.deck.shift()!;
+    ps.hand.push(drawnCard);
+    events.push({ type: 'CARD_DRAWN', player: state.activePlayer, card: drawnCard });
+    addLog(state, state.activePlayer, 'Drew a card');
+  } else {
+    addLog(state, state.activePlayer, 'First turn — no draw');
   }
 
-  const drawnCard = ps.deck.shift()!;
-  ps.hand.push(drawnCard);
-  events.push({ type: 'CARD_DRAWN', player: state.activePlayer, card: drawnCard });
-  addLog(state, state.activePlayer, 'Drew a card');
+  // Extra draw decision (can rest an AP to draw an extra card)
+  // Only offer if player has at least 1 active AP
+  const hasActiveAP = ps.ap.some(a => a.active);
+  if (hasActiveAP && ps.deck.length > 0) {
+    state.pendingAction = { type: 'EXTRA_DRAW_DECISION', player: state.activePlayer };
+    events.push({ type: 'WAITING_FOR', action: state.pendingAction });
+  } else {
+    advanceToMovement(state, events);
+  }
+}
 
-  // Wait for extra draw decision
-  state.pendingAction = { type: 'EXTRA_DRAW_DECISION', player: state.activePlayer };
-  events.push({ type: 'WAITING_FOR', action: state.pendingAction });
+// Helper: is the current active player the one who goes first?
+function isFirstGoingPlayer(state: GameState): boolean {
+  return state.activePlayer === state.firstPlayer;
+}
+
+// Helper: get what turn number this is for the current active player
+// Turn 1: first player plays (1st turn), then second player plays (1st turn)
+// Turn 2: first player plays (2nd turn), then second player plays (2nd turn)
+function getPlayerTurnNumber(state: GameState): number {
+  return state.turn;
 }
 
 function processStart(
@@ -255,13 +316,15 @@ function processStart(
   if (action.type === 'EXTRA_DRAW') {
     const ps = getPlayerState(state, player);
     if (ps.extraDrawUsed) return { error: 'Extra draw already used this turn' };
-    if (ps.life.length === 0) return { error: 'No life cards to sacrifice for extra draw' };
     if (ps.deck.length === 0) return { error: 'No cards in deck to draw' };
 
-    // Move top life card to remove area (face up)
-    const lifeCard = ps.life.shift()!;
-    ps.removeArea.push(lifeCard);
-    events.push({ type: 'EXTRA_DRAW_USED', player, lifeCard });
+    // Extra draw costs resting 1 AP card (not life)
+    const activeAPIdx = ps.ap.findIndex(a => a.active);
+    if (activeAPIdx === -1) return { error: 'No active AP to rest for extra draw' };
+
+    // Rest the AP card
+    ps.ap[activeAPIdx].active = false;
+    events.push({ type: 'AP_CHANGED', player, apStates: [...ps.ap] });
 
     // Draw 1 card
     const drawnCard = ps.deck.shift()!;
@@ -269,16 +332,7 @@ function processStart(
     events.push({ type: 'CARD_DRAWN', player, card: drawnCard });
 
     ps.extraDrawUsed = true;
-    addLog(state, player, 'Used Extra Draw');
-
-    // Check if life reached 0
-    if (ps.life.length === 0) {
-      const winner = getOpponent(player);
-      state.winner = winner;
-      state.winReason = 'Life reduced to 0';
-      events.push({ type: 'GAME_OVER', winner, reason: 'Life reduced to 0 from Extra Draw' });
-      return { state, events };
-    }
+    addLog(state, player, 'Used Extra Draw (rested 1 AP)');
 
     // Advance to movement phase
     advanceToMovement(state, events);
@@ -610,8 +664,9 @@ function processAttack(
     return { error: 'Not your turn' };
   }
 
-  // First turn: cannot attack
-  if (state.firstTurnOfGame) {
+  // First player cannot attack on their very first turn (turn 1)
+  // But the second player CAN attack on turn 1
+  if (state.turn === 1 && isFirstGoingPlayer(state)) {
     if (action.type === 'DECLARE_ATTACK') {
       return { error: 'First player cannot attack on the first turn' };
     }
@@ -1069,14 +1124,13 @@ function finishEndPhase(state: GameState, events: GameEvent[]): void {
 
   // Switch active player
   state.activePlayer = getOpponent(state.activePlayer);
-  if (state.firstTurnOfGame && state.activePlayer === 'player1') {
-    // Both players have had one turn, no longer first turn restriction
-    state.firstTurnOfGame = false;
-  }
-  if (state.activePlayer === 'player1' || (state.firstTurnOfGame && state.turn === 1)) {
-    // When it comes back to player1 (or after first full round), increment turn
-    if (!state.firstTurnOfGame || state.activePlayer === 'player1') {
-      state.turn++;
+
+  // Track turn number: increments when it comes back to the first player
+  if (state.activePlayer === state.firstPlayer) {
+    state.turn++;
+    // After both players have completed turn 1, no longer first turn of game
+    if (state.firstTurnOfGame) {
+      state.firstTurnOfGame = false;
     }
   }
 
@@ -1165,6 +1219,7 @@ export function sanitizeForPlayer(state: GameState, playerKey: PlayerKey): Sanit
     turn: state.turn,
     phase: state.phase,
     activePlayer: state.activePlayer,
+    firstPlayer: state.firstPlayer,
     firstTurnOfGame: state.firstTurnOfGame,
     winner: state.winner,
     winReason: state.winReason,
@@ -1316,7 +1371,8 @@ export function getValidActions(state: GameState, playerKey: PlayerKey): PlayerA
       break;
 
     case 'ATTACK':
-      if (!state.firstTurnOfGame) {
+      // First player cannot attack on turn 1; second player CAN
+      if (!(state.turn === 1 && state.activePlayer === state.firstPlayer)) {
         for (const card of ps.frontLine) {
           if (card.active && card.attacksRemaining > 0 && !card.isSite) {
             actions.push({ type: 'DECLARE_ATTACK', attackerInstanceId: card.instanceId });

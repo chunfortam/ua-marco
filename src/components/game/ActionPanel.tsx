@@ -48,7 +48,7 @@ export function ActionPanel({
   if (pendingAction?.type === 'EXTRA_DRAW_DECISION' && isWaitingOnYou) {
     return (
       <div className="px-4 py-2 flex items-center justify-center gap-3">
-        <span className="text-sm text-muted">Draw an extra card? (costs 1 Life)</span>
+        <span className="text-sm text-muted">Draw an extra card? (rests 1 AP)</span>
         <button
           onClick={() => sendAction({ type: 'EXTRA_DRAW' })}
           className="px-4 py-1.5 bg-accent hover:bg-accent-light text-white rounded text-sm font-medium transition-colors"
@@ -198,25 +198,31 @@ export function ActionPanel({
   // Default: phase actions
   if (isYourTurn) {
     return (
-      <div className="px-4 py-2 flex items-center justify-center gap-3">
-        <span className="text-sm text-muted">
-          {phase === 'MOVEMENT' && 'Select a card to move, or:'}
-          {phase === 'MAIN' && 'Play cards from hand, or:'}
-          {phase === 'ATTACK' && 'Select a character to attack, or:'}
-          {phase === 'START' && 'Starting phase...'}
-          {phase === 'END' && 'End phase...'}
-        </span>
-        {(phase === 'MOVEMENT' || phase === 'MAIN' || phase === 'ATTACK') && (
-          <button
-            onClick={() => sendAction({ type: 'END_PHASE' })}
-            className="px-4 py-1.5 border border-card-border text-muted hover:text-foreground hover:border-foreground rounded text-sm font-medium transition-colors"
-          >
-            End {phase} Phase
-          </button>
-        )}
+      <div className="px-4 py-2 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <span className="text-sm text-muted">
+            {phase === 'MOVEMENT' && 'Click energy line characters to move them, or:'}
+            {phase === 'MAIN' && 'Click a card in hand to play it, or:'}
+            {phase === 'ATTACK' && 'Click a front line character to attack with it, or:'}
+            {phase === 'START' && 'Starting phase...'}
+            {phase === 'END' && 'End phase...'}
+          </span>
+          {(phase === 'MOVEMENT' || phase === 'MAIN' || phase === 'ATTACK') && (
+            <button
+              onClick={() => sendAction({ type: 'END_PHASE' })}
+              className="px-4 py-1.5 border border-card-border text-muted hover:text-foreground hover:border-foreground rounded text-sm font-medium transition-colors"
+            >
+              End {phase} Phase
+            </button>
+          )}
+        </div>
         <button
-          onClick={() => sendAction({ type: 'CONCEDE' })}
-          className="px-3 py-1.5 text-red-500/50 hover:text-red-400 text-xs transition-colors"
+          onClick={() => {
+            if (confirm('Are you sure you want to concede?')) {
+              sendAction({ type: 'CONCEDE' });
+            }
+          }}
+          className="px-2 py-1 text-red-500/40 hover:text-red-400 text-xs transition-colors"
         >
           Concede
         </button>
