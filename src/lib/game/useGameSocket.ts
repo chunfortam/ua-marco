@@ -194,10 +194,11 @@ export function useGameSocketProvider(): GameSocketState {
   }, []);
 
   useEffect(() => {
+    connect();
     return () => {
       wsRef.current?.close();
     };
-  }, []);
+  }, [connect]);
 
   return {
     connectionState,
