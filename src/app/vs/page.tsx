@@ -39,6 +39,29 @@ export default function VSLobbyPage() {
           <p className="text-muted">Real-time 1v1 Union Arena TCG</p>
         </div>
 
+        {(connectionState === 'disconnected' || connectionState === 'error') && (
+          <div className="mb-6 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg text-yellow-400 text-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-yellow-500 rounded-full" />
+              <span className="font-medium">
+                {connectionState === 'error' ? 'Cannot connect to game server' : 'Connecting to game server...'}
+              </span>
+            </div>
+            <p className="mt-1 text-yellow-400/70">
+              Make sure the game server is running on port 3001. If using Docker, run <code className="bg-yellow-500/10 px-1 rounded">docker compose up</code>.
+            </p>
+          </div>
+        )}
+
+        {connectionState === 'connecting' && mode === 'menu' && (
+          <div className="mb-6 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg text-blue-400 text-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+              <span>Connecting to game server...</span>
+            </div>
+          </div>
+        )}
+
         {error && (
           <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm flex justify-between items-center">
             <span>{error}</span>
@@ -62,10 +85,10 @@ export default function VSLobbyPage() {
 
             <button
               onClick={handleCreate}
-              disabled={!playerName.trim()}
+              disabled={!playerName.trim() || connectionState !== 'connected'}
               className="w-full px-6 py-4 bg-accent hover:bg-accent-light disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-lg font-semibold text-lg transition-colors"
             >
-              Create Room
+              {connectionState !== 'connected' ? 'Connecting...' : 'Create Room'}
             </button>
 
             <div className="relative">
@@ -91,10 +114,10 @@ export default function VSLobbyPage() {
 
             <button
               onClick={handleJoin}
-              disabled={!playerName.trim() || !joinCode.trim()}
+              disabled={!playerName.trim() || !joinCode.trim() || connectionState !== 'connected'}
               className="w-full px-6 py-4 border border-accent text-accent hover:bg-accent hover:text-white disabled:opacity-40 disabled:cursor-not-allowed rounded-lg font-semibold text-lg transition-colors"
             >
-              Join Room
+              {connectionState !== 'connected' ? 'Connecting...' : 'Join Room'}
             </button>
           </div>
         )}
