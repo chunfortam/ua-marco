@@ -35,6 +35,12 @@ export default function Home() {
             >
               Deck Manager
             </Link>
+            <Link
+              href="/vs"
+              className="px-8 py-3 border border-accent text-accent hover:bg-accent hover:text-white rounded-lg font-semibold text-lg transition-colors"
+            >
+              VS Mode
+            </Link>
           </div>
         </div>
       </section>

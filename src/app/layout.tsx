@@ -54,10 +54,10 @@ export default function RootLayout({
                 Deck Manager
               </Link>
               <Link
-                href="/cards"
+                href="/vs"
                 className="text-sm px-4 py-2 rounded-lg bg-accent hover:bg-accent-light text-white transition-colors"
               >
-                Browse Cards
+                VS Mode
               </Link>
             </div>
           </nav>
