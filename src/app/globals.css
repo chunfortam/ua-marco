@@ -1,26 +1,68 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f0f13;
+  --foreground: #e8e8ed;
+  --card-bg: #1a1a24;
+  --card-border: #2a2a3a;
+  --accent: #7c5cbf;
+  --accent-light: #9b7dd4;
+  --muted: #6b6b7b;
+  --surface: #15151f;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(124, 92, 191, 0.2);
+}
+
+/* Color indicators */
+.energy-red { color: #ef4444; }
+.energy-blue { color: #3b82f6; }
+.energy-green { color: #22c55e; }
+.energy-yellow { color: #eab308; }
+.energy-purple { color: #a855f7; }
+
+.energy-bg-red { background-color: #ef444420; border-color: #ef4444; }
+.energy-bg-blue { background-color: #3b82f620; border-color: #3b82f6; }
+.energy-bg-green { background-color: #22c55e20; border-color: #22c55e; }
+.energy-bg-yellow { background-color: #eab30820; border-color: #eab308; }
+.energy-bg-purple { background-color: #a855f720; border-color: #a855f7; }
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--card-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
 }
