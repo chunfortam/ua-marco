@@ -9,18 +9,16 @@ import Link from 'next/link';
 export default function RoomPage({ params }: { params: Promise<{ roomCode: string }> }) {
   const { roomCode: routeCode } = use(params);
   const socket = useGameSocket();
-  const [hasJoined, setHasJoined] = useState(false);
   const [deckSet, setDeckSet] = useState(false);
   const [isReady, setIsReady] = useState(false);
 
-  // Auto-join the room if not already in one
+  // If we navigated directly to this URL (no active connection), try to join
   useEffect(() => {
-    if (!hasJoined && routeCode && socket.connectionState === 'disconnected') {
+    if (socket.connectionState === 'disconnected' && !socket.roomCode) {
       const name = localStorage.getItem('ua-player-name') || 'Player';
       socket.joinRoom(routeCode, name);
-      setHasJoined(true);
     }
-  }, [hasJoined, routeCode, socket]);
+  }, [routeCode, socket.connectionState, socket.roomCode, socket.joinRoom]);
 
   const handleDeckSelect = (deckCards: string[]) => {
     socket.setDeck(deckCards);
@@ -47,7 +45,7 @@ export default function RoomPage({ params }: { params: Promise<{ roomCode: strin
   }
 
   // Deck selection phase
-  if (socket.roomPhase === 'deck_select' || (socket.roomPhase === 'lobby' && hasJoined && !socket.gameState)) {
+  if (socket.roomPhase === 'deck_select' || (socket.roomPhase === 'lobby' && socket.roomCode && !socket.gameState)) {
     return (
       <div className="min-h-[calc(100vh-8rem)] flex flex-col items-center px-4 py-8">
         <div className="w-full max-w-3xl">
