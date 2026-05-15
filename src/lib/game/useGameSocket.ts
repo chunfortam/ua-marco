@@ -28,9 +28,17 @@ interface GameSocketState {
   clearError: () => void;
 }
 
-const WS_URL = typeof window !== 'undefined'
-  ? `ws://${window.location.hostname}:3001`
-  : 'ws://localhost:3001';
+function getWsUrl(): string {
+  if (typeof window === 'undefined') return 'ws://localhost:3001';
+  const host = window.location.hostname;
+  if (host === 'localhost' || host === '127.0.0.1') {
+    return `ws://${host}:3001`;
+  }
+  const proto = window.location.protocol === 'https:' ? 'wss' : 'ws';
+  return `${proto}://${window.location.host}/ws`;
+}
+
+const WS_URL = getWsUrl();
 
 export const GameSocketContext = createContext<GameSocketState | null>(null);
 
