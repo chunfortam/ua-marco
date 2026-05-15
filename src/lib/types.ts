@@ -43,3 +43,26 @@ export const SORT_OPTIONS = [
   { value: "number-asc", label: "Card Number" },
   { value: "rarity-asc", label: "Rarity" },
 ] as const;
+
+export interface DeckCard {
+  cardNumber: string;
+  count: number;
+}
+
+export interface Deck {
+  id: string;
+  name: string;
+  cards: DeckCard[];
+  createdAt: number;
+  updatedAt: number;
+}
+
+export const DECK_LIMITS = {
+  MAIN_DECK_SIZE: 50,
+  MAX_COPIES: 4,
+  MAX_COLOR_TRIGGERS: 4,
+  MAX_FINAL_TRIGGERS: 4,
+  MAX_SPECIAL_TRIGGERS: 4,
+} as const;
+
+export type TriggerType = "COLOR" | "FINAL" | "SPECIAL" | "GET" | "DRAW" | "RAID" | "ACTIVE";

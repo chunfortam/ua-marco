@@ -48,6 +48,12 @@ export default function RootLayout({
                 Card Database
               </Link>
               <Link
+                href="/deck-builder"
+                className="text-sm text-muted hover:text-foreground transition-colors"
+              >
+                Deck Manager
+              </Link>
+              <Link
                 href="/cards"
                 className="text-sm px-4 py-2 rounded-lg bg-accent hover:bg-accent-light text-white transition-colors"
               >

@@ -29,6 +29,12 @@ export default function Home() {
             >
               Browse Card Database
             </Link>
+            <Link
+              href="/deck-builder"
+              className="px-8 py-3 border border-accent text-accent hover:bg-accent hover:text-white rounded-lg font-semibold text-lg transition-colors"
+            >
+              Deck Manager
+            </Link>
           </div>
         </div>
       </section>
