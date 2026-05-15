@@ -145,14 +145,14 @@ export function importDeckFromText(text: string): DeckCard[] {
     const trimmed = line.trim();
     if (!trimmed || trimmed.startsWith("//")) continue;
 
-    const match = trimmed.match(/^(\d+)x?\s+(.+)/);
+    const match = trimmed.match(/^(\d+)\s*x?\s+(.+)/);
     if (!match) continue;
 
     const count = parseInt(match[1], 10);
     const rest = match[2].trim();
 
     const card = allCards.find(
-      (c) => c.cardNumber === rest || rest.startsWith(c.cardNumber)
+      (c) => c.cardNumber === rest || c.cardNumber.endsWith(`/${rest}`)
     );
     if (card && count > 0) {
       cards.push({ cardNumber: card.cardNumber, count: Math.min(count, DECK_LIMITS.MAX_COPIES) });
