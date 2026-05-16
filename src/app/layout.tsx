@@ -72,9 +72,12 @@ export default function RootLayout({
                 </span>{" "}
                 &mdash; A fan-made platform for the Union Arena TCG
               </div>
-              <div className="text-xs text-muted">
-                All card images and Union Arena trademarks are property of
-                BANDAI. This is a non-official fan project.
+              <div className="text-xs text-muted flex items-center gap-3">
+                <span>
+                  All card images and Union Arena trademarks are property of
+                  BANDAI. This is a non-official fan project.
+                </span>
+                <span className="text-muted/50">v0.8.0</span>
               </div>
             </div>
           </div>
