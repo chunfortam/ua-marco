@@ -151,8 +151,17 @@ export function importDeckFromText(text: string): DeckCard[] {
     const count = parseInt(match[1], 10);
     const rest = match[2].trim();
 
+    // Try exact match first, then partial card number match.
+    // The rest may contain the card name after the number (e.g. "UE04BT/CGH-1-034 Suzaku Kururugi"),
+    // so also try matching just the first token (the card number portion).
+    const firstToken = rest.split(/\s+/)[0];
+
     const card = allCards.find(
-      (c) => c.cardNumber === rest || c.cardNumber.endsWith(`/${rest}`)
+      (c) =>
+        c.cardNumber === rest ||
+        c.cardNumber === firstToken ||
+        c.cardNumber.endsWith(`/${rest}`) ||
+        c.cardNumber.endsWith(`/${firstToken}`)
     );
     if (card && count > 0) {
       cards.push({ cardNumber: card.cardNumber, count: Math.min(count, DECK_LIMITS.MAX_COPIES) });
