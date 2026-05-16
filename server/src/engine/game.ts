@@ -1,7 +1,7 @@
 import type {
   GameState, PlayerKey, PlayerAction, GameEvent, PlayerState,
   CardInstance, FieldCard, PendingAction, ActionLogEntry,
-  SanitizedGameState, SanitizedPlayerState,
+  SanitizedGameState, SanitizedPlayerState, LifeCardState,
 } from './types.js';
 import {
   getCardData, createCardInstance, createFieldCard, getOpponent,
@@ -521,6 +521,7 @@ function playCard(
 
     const fieldCard = createFieldCard(cardInstance.cardNumber, true);
     fieldCard.instanceId = cardInstance.instanceId;
+    fieldCard.active = false;  // Cards are placed rested
     ps.energyLine.push(fieldCard);
 
     events.push({ type: 'CARD_PLAYED', player, card: cardInstance, targetLine: 'energyLine', replacedCard });
@@ -549,6 +550,7 @@ function playCard(
 
   const fieldCard = createFieldCard(cardInstance.cardNumber);
   fieldCard.instanceId = cardInstance.instanceId;
+  fieldCard.active = false;  // Cards are placed rested
   line.push(fieldCard);
 
   events.push({ type: 'CARD_PLAYED', player, card: cardInstance, targetLine, replacedCard });
@@ -611,7 +613,7 @@ function playRaid(
   const raidFieldCard = createFieldCard(raidCardInstance.cardNumber);
   raidFieldCard.instanceId = raidCardInstance.instanceId;
   raidFieldCard.raidedOver = { instanceId: targetField.instanceId, cardNumber: targetField.cardNumber };
-  raidFieldCard.active = true;  // RAID always sets to active
+  raidFieldCard.active = false;  // RAID cards are also placed rested
 
   // Replace target with raid card
   const lineArr = ps[targetLine];
@@ -651,6 +653,11 @@ function processAttack(
   action: PlayerAction,
   events: GameEvent[],
 ): { state: GameState; events: GameEvent[] } | { error: string } {
+  // Handle pending life flip (attacker chooses)
+  if (state.pendingAction?.type === 'CHOOSE_LIFE_TO_FLIP') {
+    return processLifeFlip(state, player, action, events);
+  }
+
   // Handle pending block decisions (defending player)
   if (state.pendingAction?.type === 'BLOCK_DECISION') {
     return processBlockDecision(state, player, action, events);
@@ -873,170 +880,6 @@ function resolveDamage(
     totalDamage += keywords.impact;
   }
 
-  // Check for Nullify Impact from blocker (shouldn't happen here since we're taking damage, not blocking)
-  // Impact is additional damage on unblocked attacks
-
-  const triggerChecks: { card: CardInstance; triggerType: string | null; resolved: boolean; description: string }[] = [];
-
-  for (let i = 0; i < totalDamage; i++) {
-    if (ps.life.length === 0) break;
-
-    const lifeCard = ps.life.shift()!;
-    const cardData = getCardData(lifeCard.cardNumber);
-    const triggerType = parseTriggerType(cardData);
-
-    triggerChecks.push({
-      card: lifeCard,
-      triggerType,
-      resolved: false,
-      description: triggerType ? `Trigger: ${triggerType}` : 'No trigger',
-    });
-  }
-
-  events.push({
-    type: 'DAMAGE_TAKEN',
-    player: damagedPlayer,
-    count: triggerChecks.length,
-    triggerChecks,
-  });
-  addLog(state, damagedPlayer, `Took ${triggerChecks.length} damage`);
-
-  // Process triggers
-  let hasFinal = false;
-  for (const check of triggerChecks) {
-    if (!check.triggerType) {
-      // No trigger — card goes to remove area
-      ps.removeArea.push(check.card);
-      check.resolved = true;
-      continue;
-    }
-
-    switch (check.triggerType) {
-      case 'GET':
-        // Add to hand instead of remove area
-        ps.hand.push(check.card);
-        check.resolved = true;
-        check.description = `GET: ${getCardData(check.card.cardNumber)?.name} added to hand`;
-        events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'GET', card: check.card, description: check.description });
-        break;
-
-      case 'DRAW':
-        // Draw 1 card from deck
-        ps.removeArea.push(check.card);
-        if (ps.deck.length > 0) {
-          const drawn = ps.deck.shift()!;
-          ps.hand.push(drawn);
-          events.push({ type: 'CARD_DRAWN', player: damagedPlayer, card: drawn });
-        }
-        check.resolved = true;
-        check.description = 'DRAW: Drew 1 card';
-        events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'DRAW', card: check.card, description: check.description });
-        break;
-
-      case 'ACTIVE':
-        // Set 1 resting character to active — for now auto-resolve if there's only one resting
-        ps.removeArea.push(check.card);
-        const restingChars = [...ps.frontLine, ...ps.energyLine].filter(c => !c.active && !c.isSite);
-        if (restingChars.length === 1) {
-          restingChars[0].active = true;
-          check.resolved = true;
-          check.description = `ACTIVE: Set ${getCardData(restingChars[0].cardNumber)?.name} to active`;
-          events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'ACTIVE', card: check.card, description: check.description });
-        } else if (restingChars.length === 0) {
-          check.resolved = true;
-          check.description = 'ACTIVE: No resting characters to activate';
-          events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'ACTIVE', card: check.card, description: check.description });
-        } else {
-          // Need player to choose
-          state.pendingAction = { type: 'ACTIVE_TRIGGER_CHOOSE', player: damagedPlayer };
-          check.resolved = false;
-          check.description = 'ACTIVE: Choose a resting character to set to active';
-          events.push({ type: 'WAITING_FOR', action: state.pendingAction });
-        }
-        break;
-
-      case 'SPECIAL':
-        // Choose 1 card from remove area to return to hand
-        ps.removeArea.push(check.card);
-        if (ps.removeArea.length > 0) {
-          state.pendingAction = { type: 'SPECIAL_TRIGGER_CHOOSE', player: damagedPlayer };
-          check.description = 'SPECIAL: Choose a card from sideline/remove to return to hand';
-          events.push({ type: 'WAITING_FOR', action: state.pendingAction });
-        } else {
-          check.resolved = true;
-          check.description = 'SPECIAL: No cards in remove area';
-          events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'SPECIAL', card: check.card, description: check.description });
-        }
-        break;
-
-      case 'COLOR': {
-        // Play 1 character of matching color with ≤2 energy and 1 AP cost from sideline
-        ps.removeArea.push(check.card);
-        const triggerColor = getCardData(check.card.cardNumber)?.requiredEnergyColor;
-        if (triggerColor) {
-          const eligibleInSideline = ps.sidelineArea.filter(c => {
-            const cd = getCardData(c.cardNumber);
-            return cd?.cardType === 'Character' &&
-              cd.requiredEnergyColor === triggerColor &&
-              (cd.requiredEnergyCount ?? 0) <= 2 &&
-              (typeof cd.apCost === 'number' ? cd.apCost : parseInt(String(cd.apCost)) || 0) <= 1;
-          });
-          if (eligibleInSideline.length > 0) {
-            state.pendingAction = { type: 'COLOR_TRIGGER_CHOOSE', player: damagedPlayer, color: triggerColor };
-            check.description = `COLOR: Choose a ${triggerColor} character to play from sideline`;
-            events.push({ type: 'WAITING_FOR', action: state.pendingAction });
-          } else {
-            check.resolved = true;
-            check.description = 'COLOR: No eligible characters in sideline';
-            events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'COLOR', card: check.card, description: check.description });
-          }
-        } else {
-          ps.removeArea.push(check.card);
-          check.resolved = true;
-        }
-        break;
-      }
-
-      case 'FINAL':
-        ps.removeArea.push(check.card);
-        hasFinal = true;
-        check.description = 'FINAL: Will resolve after all damage is checked';
-        break;
-
-      case 'RAID':
-        // Trigger card can be played as a Raid
-        ps.removeArea.push(check.card);
-        check.resolved = true;
-        check.description = 'RAID trigger: Card can be played as RAID (manual resolution)';
-        events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'RAID', card: check.card, description: check.description });
-        break;
-
-      default:
-        ps.removeArea.push(check.card);
-        check.resolved = true;
-    }
-  }
-
-  // Handle FINAL trigger: if life is 0 after all checks, place 1 card from deck to life
-  if (hasFinal && ps.life.length === 0 && ps.deck.length > 0) {
-    const finalCard = ps.deck.shift()!;
-    ps.life.push(finalCard);
-    const finalCheck = triggerChecks.find(c => c.triggerType === 'FINAL');
-    if (finalCheck) {
-      finalCheck.resolved = true;
-      finalCheck.description = 'FINAL: Placed 1 card from deck to life, survived!';
-      events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'FINAL', card: finalCheck.card, description: finalCheck.description });
-    }
-  } else if (hasFinal) {
-    const finalCheck = triggerChecks.find(c => c.triggerType === 'FINAL');
-    if (finalCheck) {
-      finalCheck.resolved = true;
-      finalCheck.description = 'FINAL: Life is not 0, FINAL did not activate';
-      events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'FINAL', card: finalCheck.card, description: finalCheck.description });
-    }
-  }
-
-  // Check win condition
   if (ps.life.length === 0) {
     const winner = getOpponent(damagedPlayer);
     state.winner = winner;
@@ -1045,16 +888,217 @@ function resolveDamage(
     return { state, events };
   }
 
-  // Clear pending action if no triggers need resolution
-  if (!state.pendingAction) {
+  // Attacker chooses which life card to flip
+  state.pendingAction = {
+    type: 'CHOOSE_LIFE_TO_FLIP',
+    player: attackerPlayer,
+    damagedPlayer,
+    attackerInstanceId: attacker.instanceId,
+    attackerPlayer,
+    damageRemaining: totalDamage,
+  };
+  events.push({ type: 'WAITING_FOR', action: state.pendingAction });
+  addLog(state, damagedPlayer, `Taking ${totalDamage} damage — opponent choosing life card to flip`);
+
+  return { state, events };
+}
+
+function processLifeFlip(
+  state: GameState,
+  player: PlayerKey,
+  action: PlayerAction,
+  events: GameEvent[],
+): { state: GameState; events: GameEvent[] } | { error: string } {
+  if (action.type !== 'FLIP_LIFE_CARD') {
+    return { error: 'Expected FLIP_LIFE_CARD action' };
+  }
+
+  const pending = state.pendingAction as Extract<PendingAction, { type: 'CHOOSE_LIFE_TO_FLIP' }>;
+  if (player !== pending.player) return { error: 'Not your turn to flip life card' };
+
+  const damagedPlayer = pending.damagedPlayer as PlayerKey;
+  const ps = getPlayerState(state, damagedPlayer);
+
+  if (action.lifeIndex < 0 || action.lifeIndex >= ps.life.length) {
+    return { error: `Invalid life card index: ${action.lifeIndex}` };
+  }
+
+  // Remove the chosen life card
+  const lifeCard = ps.life.splice(action.lifeIndex, 1)[0];
+  const cardData = getCardData(lifeCard.cardNumber);
+  const triggerType = parseTriggerType(cardData);
+
+  const triggerCheck = {
+    card: lifeCard,
+    triggerType,
+    resolved: false,
+    description: triggerType ? `Trigger: ${triggerType}` : 'No trigger',
+  };
+
+  events.push({
+    type: 'DAMAGE_TAKEN',
+    player: damagedPlayer,
+    count: 1,
+    triggerChecks: [triggerCheck],
+  });
+
+  // Process the trigger for this card
+  resolveLifeTrigger(state, damagedPlayer, triggerCheck, events);
+
+  const damageRemaining = pending.damageRemaining - 1;
+
+  // Check win condition
+  if (ps.life.length === 0) {
+    // Check for FINAL trigger
+    if (triggerType === 'FINAL' && ps.deck.length > 0) {
+      const finalCard = ps.deck.shift()!;
+      ps.life.push(finalCard);
+      triggerCheck.resolved = true;
+      triggerCheck.description = 'FINAL: Placed 1 card from deck to life, survived!';
+      events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'FINAL', card: lifeCard, description: triggerCheck.description });
+    } else {
+      const winner = getOpponent(damagedPlayer);
+      state.winner = winner;
+      state.winReason = 'Opponent life reduced to 0';
+      events.push({ type: 'GAME_OVER', winner, reason: 'Life reduced to 0' });
+      return { state, events };
+    }
+  }
+
+  // More damage remaining? Prompt for next flip
+  if (damageRemaining > 0 && ps.life.length > 0) {
+    state.pendingAction = {
+      type: 'CHOOSE_LIFE_TO_FLIP',
+      player: pending.attackerPlayer,
+      damagedPlayer,
+      attackerInstanceId: pending.attackerInstanceId,
+      attackerPlayer: pending.attackerPlayer,
+      damageRemaining,
+    };
+    events.push({ type: 'WAITING_FOR', action: state.pendingAction });
+  } else {
+    state.pendingAction = null;
     // Check for double attack
-    const attacker2 = getPlayerState(state, attackerPlayer).frontLine.find(c => c.instanceId === attacker.instanceId);
+    const attackerPS = getPlayerState(state, pending.attackerPlayer);
+    const attacker2 = attackerPS.frontLine.find(c => c.instanceId === pending.attackerInstanceId);
     if (attacker2 && attacker2.attacksRemaining > 0) {
       attacker2.active = true;
     }
   }
 
   return { state, events };
+}
+
+function resolveLifeTrigger(
+  state: GameState,
+  damagedPlayer: PlayerKey,
+  check: { card: CardInstance; triggerType: string | null; resolved: boolean; description: string },
+  events: GameEvent[],
+): void {
+  const ps = getPlayerState(state, damagedPlayer);
+
+  if (!check.triggerType) {
+    ps.removeArea.push(check.card);
+    check.resolved = true;
+    return;
+  }
+
+  switch (check.triggerType) {
+    case 'GET':
+      ps.hand.push(check.card);
+      check.resolved = true;
+      check.description = `GET: ${getCardData(check.card.cardNumber)?.name} added to hand`;
+      events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'GET', card: check.card, description: check.description });
+      break;
+
+    case 'DRAW':
+      ps.removeArea.push(check.card);
+      if (ps.deck.length > 0) {
+        const drawn = ps.deck.shift()!;
+        ps.hand.push(drawn);
+        events.push({ type: 'CARD_DRAWN', player: damagedPlayer, card: drawn });
+      }
+      check.resolved = true;
+      check.description = 'DRAW: Drew 1 card';
+      events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'DRAW', card: check.card, description: check.description });
+      break;
+
+    case 'ACTIVE': {
+      ps.removeArea.push(check.card);
+      const restingChars = [...ps.frontLine, ...ps.energyLine].filter(c => !c.active && !c.isSite);
+      if (restingChars.length === 1) {
+        restingChars[0].active = true;
+        check.resolved = true;
+        check.description = `ACTIVE: Set ${getCardData(restingChars[0].cardNumber)?.name} to active`;
+        events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'ACTIVE', card: check.card, description: check.description });
+      } else if (restingChars.length === 0) {
+        check.resolved = true;
+        check.description = 'ACTIVE: No resting characters to activate';
+        events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'ACTIVE', card: check.card, description: check.description });
+      } else {
+        state.pendingAction = { type: 'ACTIVE_TRIGGER_CHOOSE', player: damagedPlayer };
+        check.description = 'ACTIVE: Choose a resting character to set to active';
+        events.push({ type: 'WAITING_FOR', action: state.pendingAction });
+      }
+      break;
+    }
+
+    case 'SPECIAL':
+      ps.removeArea.push(check.card);
+      if (ps.removeArea.length > 0) {
+        state.pendingAction = { type: 'SPECIAL_TRIGGER_CHOOSE', player: damagedPlayer };
+        check.description = 'SPECIAL: Choose a card from remove area to return to hand';
+        events.push({ type: 'WAITING_FOR', action: state.pendingAction });
+      } else {
+        check.resolved = true;
+        check.description = 'SPECIAL: No cards in remove area';
+        events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'SPECIAL', card: check.card, description: check.description });
+      }
+      break;
+
+    case 'COLOR': {
+      ps.removeArea.push(check.card);
+      const triggerColor = getCardData(check.card.cardNumber)?.requiredEnergyColor;
+      if (triggerColor) {
+        const eligibleInSideline = ps.sidelineArea.filter(c => {
+          const cd = getCardData(c.cardNumber);
+          return cd?.cardType === 'Character' &&
+            cd.requiredEnergyColor === triggerColor &&
+            (cd.requiredEnergyCount ?? 0) <= 2 &&
+            (typeof cd.apCost === 'number' ? cd.apCost : parseInt(String(cd.apCost)) || 0) <= 1;
+        });
+        if (eligibleInSideline.length > 0) {
+          state.pendingAction = { type: 'COLOR_TRIGGER_CHOOSE', player: damagedPlayer, color: triggerColor };
+          check.description = `COLOR: Choose a ${triggerColor} character to play from sideline`;
+          events.push({ type: 'WAITING_FOR', action: state.pendingAction });
+        } else {
+          check.resolved = true;
+          check.description = 'COLOR: No eligible characters in sideline';
+          events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'COLOR', card: check.card, description: check.description });
+        }
+      } else {
+        check.resolved = true;
+      }
+      break;
+    }
+
+    case 'FINAL':
+      // FINAL is handled after the flip in processLifeFlip
+      ps.removeArea.push(check.card);
+      check.description = 'FINAL: Will activate if life reaches 0';
+      break;
+
+    case 'RAID':
+      ps.removeArea.push(check.card);
+      check.resolved = true;
+      check.description = 'RAID trigger: Card can be played as RAID (manual resolution)';
+      events.push({ type: 'TRIGGER_RESOLVED', triggerType: 'RAID', card: check.card, description: check.description });
+      break;
+
+    default:
+      ps.removeArea.push(check.card);
+      check.resolved = true;
+  }
 }
 
 // ==========================================
@@ -1234,12 +1278,19 @@ export function sanitizeForPlayer(state: GameState, playerKey: PlayerKey): Sanit
 }
 
 function sanitizePlayerState(ps: PlayerState, isYou: boolean): SanitizedPlayerState {
+  // Life cards: all face-down (card identity hidden)
+  const lifeCards: LifeCardState[] = ps.life.map((_, i) => ({
+    index: i,
+    faceDown: true,
+  }));
+
   return {
     id: ps.id,
     deckCount: ps.deck.length,
     hand: isYou ? [...ps.hand] : [],
     handCount: ps.hand.length,
     lifeCount: ps.life.length,
+    lifeCards,
     frontLine: ps.frontLine.map(c => ({ ...c })),
     energyLine: ps.energyLine.map(c => ({ ...c })),
     sidelineArea: [...ps.sidelineArea],
@@ -1272,7 +1323,7 @@ export function getValidActions(state: GameState, playerKey: PlayerKey): PlayerA
         return actions;
 
       case 'EXTRA_DRAW_DECISION':
-        if (ps.life.length > 0 && ps.deck.length > 0) {
+        if (ps.ap.some(a => a.active) && ps.deck.length > 0) {
           actions.push({ type: 'EXTRA_DRAW' });
         }
         actions.push({ type: 'SKIP_EXTRA_DRAW' });
@@ -1327,6 +1378,15 @@ export function getValidActions(state: GameState, playerKey: PlayerKey): PlayerA
           if (card.active && !card.isSite) {
             actions.push({ type: 'SNIPE_TARGET', targetInstanceId: card.instanceId });
           }
+        }
+        return actions;
+      }
+
+      case 'CHOOSE_LIFE_TO_FLIP': {
+        const damagedPlayerKey = pending.damagedPlayer as PlayerKey;
+        const damagedPS = getPlayerState(state, damagedPlayerKey);
+        for (let i = 0; i < damagedPS.life.length; i++) {
+          actions.push({ type: 'FLIP_LIFE_CARD', lifeIndex: i });
         }
         return actions;
       }

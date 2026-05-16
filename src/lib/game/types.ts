@@ -30,12 +30,19 @@ export interface APState {
   active: boolean;
 }
 
+export interface LifeCardState {
+  index: number;
+  faceDown: boolean;
+  cardNumber?: string;
+}
+
 export interface SanitizedPlayerState {
   id: string;
   deckCount: number;
   hand: CardInstance[];
   handCount: number;
   lifeCount: number;
+  lifeCards: LifeCardState[];
   frontLine: FieldCard[];
   energyLine: FieldCard[];
   sidelineArea: CardInstance[];
@@ -55,6 +62,8 @@ export interface PendingAction {
   color?: string;
   raidCard?: CardInstance;
   card?: CardInstance;
+  damagedPlayer?: PlayerKey;
+  damageRemaining?: number;
 }
 
 export interface ActionLogEntry {
@@ -127,6 +136,7 @@ export type PlayerAction =
   | { type: 'CHOOSE_ACTIVE_TARGET'; cardInstanceId: string }
   | { type: 'CHOOSE_RAID_TRIGGER_TARGET'; targetInstanceId: string; moveToFront: boolean }
   | { type: 'SKIP_TRIGGER' }
+  | { type: 'FLIP_LIFE_CARD'; lifeIndex: number }
   | { type: 'CONCEDE' };
 
 export type GameEvent =

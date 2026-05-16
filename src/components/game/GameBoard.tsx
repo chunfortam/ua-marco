@@ -149,9 +149,6 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
             </div>
           </div>
           <div className="flex items-center gap-4 text-xs text-muted">
-            <button onClick={() => { setViewingZone('life'); setViewingPlayer('opponent'); }} className="hover:text-foreground">
-              Life: {opponent.lifeCount}
-            </button>
             <button onClick={() => { setViewingZone('deck'); setViewingPlayer('opponent'); }} className="hover:text-foreground">
               Deck: {opponent.deckCount}
             </button>
@@ -159,6 +156,35 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
             <button onClick={() => { setViewingZone('remove'); setViewingPlayer('opponent'); }} className="hover:text-foreground">
               Remove: {opponent.removeArea.length}
             </button>
+            <button onClick={() => { setViewingZone('sideline'); setViewingPlayer('opponent'); }} className="hover:text-foreground">
+              Sideline: {opponent.sidelineArea.length}
+            </button>
+          </div>
+        </div>
+
+        {/* Opponent Life Cards */}
+        <div className="px-4 py-1">
+          <div className="flex items-center gap-1 min-h-[36px]">
+            <span className="text-xs text-muted w-16 shrink-0">Life</span>
+            <div className="flex gap-1 flex-1 justify-center">
+              {opponent.lifeCards.map((lc) => {
+                const isFlipTarget = pendingAction?.type === 'CHOOSE_LIFE_TO_FLIP' && pendingAction.damagedPlayer !== yourKey && isWaitingOnYou;
+                return (
+                  <button
+                    key={lc.index}
+                    onClick={() => isFlipTarget && sendAction({ type: 'FLIP_LIFE_CARD', lifeIndex: lc.index })}
+                    className={`w-8 h-11 rounded border-2 flex items-center justify-center text-[8px] font-bold transition-all ${
+                      isFlipTarget
+                        ? 'border-red-500 bg-red-500/20 text-red-400 cursor-pointer hover:scale-110 hover:bg-red-500/30 animate-pulse'
+                        : 'border-card-border bg-card-bg text-muted cursor-default'
+                    }`}
+                  >
+                    ?
+                  </button>
+                );
+              })}
+              {opponent.lifeCards.length === 0 && <span className="text-xs text-red-400">No life!</span>}
+            </div>
           </div>
         </div>
 
@@ -255,6 +281,24 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
           </div>
         </div>
 
+        {/* Your Life Cards */}
+        <div className="px-4 py-1">
+          <div className="flex items-center gap-1 min-h-[36px]">
+            <span className="text-xs text-muted w-16 shrink-0">Life</span>
+            <div className="flex gap-1 flex-1 justify-center">
+              {you.lifeCards.map((lc) => (
+                <div
+                  key={lc.index}
+                  className="w-8 h-11 rounded border-2 border-card-border bg-card-bg flex items-center justify-center text-[8px] font-bold text-muted"
+                >
+                  ?
+                </div>
+              ))}
+              {you.lifeCards.length === 0 && <span className="text-xs text-red-400">No life!</span>}
+            </div>
+          </div>
+        </div>
+
         {/* Your Info */}
         <div className="px-4 py-1 flex items-center justify-between text-sm">
           <div className="flex items-center gap-3">
@@ -273,9 +317,6 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
             </div>
           </div>
           <div className="flex items-center gap-4 text-xs text-muted">
-            <button onClick={() => { setViewingZone('life'); setViewingPlayer('you'); }} className="hover:text-foreground">
-              Life: {you.lifeCount}
-            </button>
             <button onClick={() => { setViewingZone('deck'); setViewingPlayer('you'); }} className="hover:text-foreground">
               Deck: {you.deckCount}
             </button>

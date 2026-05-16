@@ -121,7 +121,7 @@ export function ActionPanel({
   if (pendingAction?.type === 'COLOR_TRIGGER_CHOOSE' && isWaitingOnYou) {
     return (
       <div className="px-4 py-2 flex items-center justify-center gap-3">
-        <span className="text-sm text-yellow-400">COLOR Trigger: Choose an eligible character to play from Remove Area</span>
+        <span className="text-sm text-yellow-400">COLOR Trigger: Choose an eligible character to play from Sideline</span>
         <button
           onClick={() => sendAction({ type: 'SKIP_TRIGGER' })}
           className="px-4 py-1.5 border border-card-border text-muted hover:text-foreground rounded text-sm font-medium transition-colors"
@@ -143,6 +143,28 @@ export function ActionPanel({
         >
           Skip
         </button>
+      </div>
+    );
+  }
+
+  // Life card flip (attacker chooses)
+  if (pendingAction?.type === 'CHOOSE_LIFE_TO_FLIP' && isWaitingOnYou) {
+    const dmgLeft = pendingAction.damageRemaining || 1;
+    return (
+      <div className="px-4 py-2 flex items-center justify-center gap-3">
+        <span className="text-sm text-red-400">
+          Choose opponent&apos;s life card to flip ({dmgLeft} damage remaining)
+        </span>
+      </div>
+    );
+  }
+
+  // Waiting for attacker to flip your life card
+  if (pendingAction?.type === 'CHOOSE_LIFE_TO_FLIP' && !isWaitingOnYou) {
+    return (
+      <div className="px-4 py-2 flex items-center justify-center gap-2">
+        <div className="w-1.5 h-1.5 bg-red-400 rounded-full animate-pulse" />
+        <span className="text-sm text-red-400">Opponent is choosing your life card to flip...</span>
       </div>
     );
   }

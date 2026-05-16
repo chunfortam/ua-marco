@@ -107,7 +107,8 @@ export type PendingAction =
   | { type: 'RAID_TRIGGER_CHOOSE'; player: PlayerKey; raidCard: CardInstance }
   | { type: 'EXTRA_DRAW_DECISION'; player: PlayerKey }
   | { type: 'ACTIVE_TRIGGER_CHOOSE'; player: PlayerKey }
-  | { type: 'GET_TRIGGER_RESOLVED'; player: PlayerKey; card: CardInstance };
+  | { type: 'GET_TRIGGER_RESOLVED'; player: PlayerKey; card: CardInstance }
+  | { type: 'CHOOSE_LIFE_TO_FLIP'; player: PlayerKey; damagedPlayer: PlayerKey; attackerInstanceId: string; attackerPlayer: PlayerKey; damageRemaining: number };
 
 // --- Player Actions (client → server) ---
 
@@ -130,6 +131,7 @@ export type PlayerAction =
   | { type: 'CHOOSE_ACTIVE_TARGET'; cardInstanceId: string }
   | { type: 'CHOOSE_RAID_TRIGGER_TARGET'; targetInstanceId: string; moveToFront: boolean }
   | { type: 'SKIP_TRIGGER' }
+  | { type: 'FLIP_LIFE_CARD'; lifeIndex: number }
   | { type: 'CONCEDE' };
 
 // --- Game Events (server → clients) ---
@@ -194,12 +196,19 @@ export interface SanitizedGameState {
   actionLog: ActionLogEntry[];
 }
 
+export interface LifeCardState {
+  index: number;
+  faceDown: boolean;
+  cardNumber?: string;  // only revealed when flipped
+}
+
 export interface SanitizedPlayerState {
   id: string;
   deckCount: number;
   hand: CardInstance[];        // only your own hand is populated; opponent = []
   handCount: number;
   lifeCount: number;
+  lifeCards: LifeCardState[];  // visual representation of life area
   frontLine: FieldCard[];
   energyLine: FieldCard[];
   sidelineArea: CardInstance[];
