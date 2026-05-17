@@ -1,5 +1,197 @@
 [
   {
+    "id": "2.5-dimensional-seduction",
+    "name": "クーリア/ノノア (Yellow)",
+    "title": "2.5 Dimensional Seduction",
+    "color": "Yellow",
+    "totalCards": 50,
+    "characters": 38,
+    "events": 12,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA33BT/NGR-1-023",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA33BT/NGR-1-028",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA33BT/NGR-1-029",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA33BT/NGR-1-030",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA33BT/NGR-1-010",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA33BT/NGR-1-035",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA33BT/NGR-1-037",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA33BT/NGR-1-038",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA33BT/NGR-1-015",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA33BT/NGR-1-020",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA33BT/NGR-1-002",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA33BT/NGR-1-005",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA33BT/NGR-1-021",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "arknights",
+    "name": "Deathless Black Snake Talulah (Purple)",
+    "title": "ARKNIGHTS",
+    "color": "Purple",
+    "totalCards": 50,
+    "characters": 36,
+    "events": 12,
+    "sites": 2,
+    "cards": [
+      {
+        "cardNumber": "EX11BT/ARK-2-044",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX11BT/ARK-2-033",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX11BT/ARK-2-037",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX11BT/ARK-2-040",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX11BT/ARK-2-056",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX11BT/ARK-2-057",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX11BT/ARK-2-058",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX11BT/ARK-2-055",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "EX11BT/ARK-2-043",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX11BT/ARK-2-046",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX11BT/ARK-2-050",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX11BT/ARK-2-052",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX11BT/ARK-2-054",
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "id": "arknights",
+    "name": "アーミヤ (Blue)",
+    "title": "Arknights",
+    "color": "Blue",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA30BT/ARK-1-054",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA30ST/ARK-1-102",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA30ST/ARK-1-107",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA30BT/ARK-1-034",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA30ST/ARK-1-064",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA30ST/ARK-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA30BT/ARK-1-048",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA30ST/ARK-1-050",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA30ST/ARK-1-106",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA30ST/ARK-1-103",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA30BT/ARK-1-037",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA30BT/ARK-1-044",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA30BT/ARK-1-056",
+        "quantity": 2
+      }
+    ]
+  },
+  {
     "id": "attack-on-titan",
     "name": "Eren Jaeger (Attack Titan) (Red)",
     "title": "Attack on Titan",
@@ -10,6 +202,10 @@
     "sites": 4,
     "cards": [
       {
+        "cardNumber": "EX10BT/AOT-2-069",
+        "quantity": 4
+      },
+      {
         "cardNumber": "UE10BT/AOT-1-094",
         "quantity": 4
       },
@@ -19,10 +215,6 @@
       },
       {
         "cardNumber": "UE10BT/AOT-1-089",
-        "quantity": 4
-      },
-      {
-        "cardNumber": "UE10ST/AOT-1-102",
         "quantity": 4
       },
       {
@@ -46,6 +238,14 @@
         "quantity": 2
       },
       {
+        "cardNumber": "EX10BT/AOT-2-065",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UE10ST/AOT-1-102",
+        "quantity": 4
+      },
+      {
         "cardNumber": "UE10BT/AOT-1-074",
         "quantity": 4
       },
@@ -54,15 +254,135 @@
         "quantity": 4
       },
       {
-        "cardNumber": "UE10ST/AOT-1-103",
+        "cardNumber": "EX10BT/AOT-2-064",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "attack-on-titan-(jp)",
+    "name": "エレン・イェーガー（進撃の巨人） (Red)",
+    "title": "Attack on Titan (JP)",
+    "color": "Red",
+    "totalCards": 50,
+    "characters": 38,
+    "events": 12,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA23BT/AOT-1-094",
         "quantity": 4
       },
       {
-        "cardNumber": "UE10BT/AOT-1-069",
+        "cardNumber": "UA23ST/AOT-1-107",
         "quantity": 4
       },
       {
-        "cardNumber": "UE10BT/AOT-1-079",
+        "cardNumber": "UA23BT/AOT-1-089",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA23ST/AOT-1-102",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA23ST/AOT-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA23BT/AOT-1-099",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA23ST/AOT-1-097",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA23BT/AOT-1-074",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA23BT/AOT-1-077",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA23ST/AOT-1-103",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA23BT/AOT-1-069",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA23BT/AOT-1-079",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA23BT/AOT-1-080",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "bleach-(jp)",
+    "name": "黒崎 一護 (Purple)",
+    "title": "BLEACH (JP)",
+    "color": "Purple",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA08ST/BLC-1-104",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA08BT/BLC-1-047",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA08BT/BLC-1-050",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA08ST/BLC-1-064",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA08ST/BLC-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX07BT/BLC-2-057",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX07BT/BLC-2-060",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA08BT/BLC-1-052",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA08BT/BLC-1-055",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA08ST/BLC-1-101",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA08ST/BLC-1-102",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA08BT/BLC-1-044",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA08BT/BLC-1-054",
         "quantity": 2
       }
     ]
@@ -204,6 +524,134 @@
     ]
   },
   {
+    "id": "black-clover-(jp)",
+    "name": "アスタ (Red)",
+    "title": "Black Clover (JP)",
+    "color": "Red",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA20ST/BCV-1-103",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA20BT/BCV-1-071",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA20BT/BCV-1-088",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA20BT/BCV-1-093",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA20ST/BCV-1-100",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA20ST/BCV-1-096",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA20ST/BCV-1-077",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA20ST/BCV-1-085",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA20ST/BCV-1-107",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA20BT/BCV-1-072",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA20BT/BCV-1-086",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA20ST/BCV-1-104",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA20BT/BCV-1-082",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "blue-lock",
+    "name": "凪 誠士郎 (Blue)",
+    "title": "Blue Lock",
+    "color": "Blue",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA12BT/BLK-1-039",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA12BT/BLK-1-046",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA12BT/BLK-1-050",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA12BT/BLK-1-059",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA12ST/BLK-1-065",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA12ST/BLK-1-064",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA12BT/BLK-1-042",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA12ST/BLK-1-105",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA12BT/BLK-1-049",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA12BT/BLK-1-053",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA12BT/BLK-1-060",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA12ST/BLK-1-056",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA12ST/BLK-1-102",
+        "quantity": 2
+      }
+    ]
+  },
+  {
     "id": "code-geass-lelouch-of-the-rebellion",
     "name": "Gawain (Purple)",
     "title": "CODE GEASS Lelouch of the Rebellion",
@@ -267,6 +715,326 @@
       },
       {
         "cardNumber": "UEX03BT/CGH-2-048",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "chained-soldier",
+    "name": "Yuki Wakura (Slave) (Yellow)",
+    "title": "Chained Soldier",
+    "color": "Yellow",
+    "totalCards": 50,
+    "characters": 36,
+    "events": 12,
+    "sites": 2,
+    "cards": [
+      {
+        "cardNumber": "UA49BT/MSS-1-004",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA49BT/MSS-1-012",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA49BT/MSS-1-019",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA49BT/MSS-1-038",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA49BT/MSS-1-040",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA49BT/MSS-1-041",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA49BT/MSS-1-037",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "UA49BT/MSS-1-007",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA49BT/MSS-1-026",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA49BT/MSS-1-029",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA49BT/MSS-1-036",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA49BT/MSS-1-006",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA49BT/MSS-1-034",
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "id": "chainsaw-man",
+    "name": "ボム (Purple)",
+    "title": "Chainsaw Man",
+    "color": "Purple",
+    "totalCards": 50,
+    "characters": 38,
+    "events": 12,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA53BT/CSM-1-007",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA53BT/CSM-1-017",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA53BT/CSM-1-022",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA53BT/CSM-1-034",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA53BT/CSM-1-036",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA53BT/CSM-1-039",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA53BT/CSM-1-029",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA53BT/CSM-1-011",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA53BT/CSM-1-012",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA53BT/CSM-1-001",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA53BT/CSM-1-009",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA53BT/CSM-1-014",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA53BT/CSM-1-002",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "code-geass-(jp)",
+    "name": "紅蓮弐式 (Purple)",
+    "title": "Code Geass (JP)",
+    "color": "Purple",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA01ST/CGH-1-107",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA01BT/CGH-1-022",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA01BT/CGH-1-024",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX02BT/CGH-2-047",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA01ST/CGH-1-030",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA01ST/CGH-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA01ST/CGH-1-106",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA01BT/CGH-1-025",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA01BT/CGH-1-026",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX02BT/CGH-2-046",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX02BT/CGH-2-048",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA01ST/CGH-1-015",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA01ST/CGH-1-101",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "code-geass-roze",
+    "name": "ラズベリー (Yellow)",
+    "title": "Code Geass: Roze",
+    "color": "Yellow",
+    "totalCards": 50,
+    "characters": 38,
+    "events": 12,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA34BT/CGD-1-016",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA34BT/CGD-1-021",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA34BT/CGD-1-024",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA34BT/CGD-1-032",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA34BT/CGD-1-029",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA34BT/CGD-1-035",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA34BT/CGD-1-038",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA34BT/CGD-1-039",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA34BT/CGD-1-009",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA34BT/CGD-1-012",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA34BT/CGD-1-018",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA34BT/CGD-1-020",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA34BT/CGD-1-002",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "demon-slayer-(jp)",
+    "name": "竈門 炭治郎 (Yellow)",
+    "title": "Demon Slayer (JP)",
+    "color": "Yellow",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA05BT/KMY-1-026",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA05BT/KMY-1-008",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA05BT/KMY-1-025",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA05BT/KMY-1-027",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA05ST/KMY-1-033",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA05ST/KMY-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX05BT/KMY-3-009",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA05ST/KMY-1-106",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA05BT/KMY-1-010",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA05BT/KMY-1-013",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA05BT/KMY-1-017",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA05BT/KMY-1-018",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX05BT/KMY-3-007",
         "quantity": 2
       }
     ]
@@ -340,14 +1108,78 @@
     ]
   },
   {
+    "id": "dr.-stone",
+    "name": "大木 大樹 (Green)",
+    "title": "Dr. STONE",
+    "color": "Green",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA14BT/DST-1-080",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA14BT/DST-1-070",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA14BT/DST-1-087",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA14ST/DST-1-088",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA14ST/DST-1-107",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA14ST/DST-1-096",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA14ST/DST-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA14BT/DST-1-079",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA14BT/DST-1-083",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA14ST/DST-1-075",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA14ST/DST-1-104",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA14BT/DST-1-081",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA14BT/DST-1-091",
+        "quantity": 2
+      }
+    ]
+  },
+  {
     "id": "evangelion-new-theatrical-edition",
     "name": "Evangelion Proto Type-00 (Red)",
     "title": "Evangelion: New Theatrical Edition",
     "color": "Red",
     "totalCards": 50,
-    "characters": 38,
+    "characters": 40,
     "events": 8,
-    "sites": 4,
+    "sites": 2,
     "cards": [
       {
         "cardNumber": "UE15ST/EVA-1-105",
@@ -378,11 +1210,19 @@
         "quantity": 2
       },
       {
-        "cardNumber": "UE15BT/EVA-1-093",
-        "quantity": 2
+        "cardNumber": "UE15BT/EVA-1-081",
+        "quantity": 4
       },
       {
-        "cardNumber": "UE15BT/EVA-1-081",
+        "cardNumber": "UA44ST/EVA-1-105",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA44BT/EVA-1-078",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA44BT/EVA-1-081",
         "quantity": 4
       },
       {
@@ -392,18 +1232,6 @@
       {
         "cardNumber": "UE15ST/EVA-1-101",
         "quantity": 4
-      },
-      {
-        "cardNumber": "UE15ST/EVA-1-102",
-        "quantity": 4
-      },
-      {
-        "cardNumber": "UE15BT/EVA-1-092",
-        "quantity": 4
-      },
-      {
-        "cardNumber": "UE15ST/EVA-1-068",
-        "quantity": 2
       }
     ]
   },
@@ -476,6 +1304,138 @@
     ]
   },
   {
+    "id": "fullmetal-alchemist-brotherhood",
+    "name": "Edward Elric (Yellow)",
+    "title": "Fullmetal Alchemist: Brotherhood",
+    "color": "Yellow",
+    "totalCards": 50,
+    "characters": 34,
+    "events": 12,
+    "sites": 4,
+    "cards": [
+      {
+        "cardNumber": "UA37ST/FMA-1-103",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA37BT/FMA-1-004",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA37BT/FMA-1-026",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA37ST/FMA-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA37ST/FMA-1-031",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA37ST/FMA-1-033",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA37ST/FMA-1-108",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "UA37BT/FMA-1-028",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "UA37BT/FMA-1-014",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA37BT/FMA-1-021",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA37ST/FMA-1-104",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA37ST/FMA-1-105",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA37ST/FMA-1-106",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA37BT/FMA-1-016",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "gamera-rebirth",
+    "name": "バイラス (Blue)",
+    "title": "GAMERA Rebirth",
+    "color": "Blue",
+    "totalCards": 50,
+    "characters": 38,
+    "events": 12,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA22BT/GMR-1-008",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA22BT/GMR-1-030",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA22BT/GMR-1-012",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA22BT/GMR-1-021",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA22BT/GMR-1-036",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA22BT/GMR-1-033",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA22BT/GMR-1-034",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA22BT/GMR-1-003",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA22BT/GMR-1-025",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA22BT/GMR-1-004",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA22BT/GMR-1-013",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA22BT/GMR-1-002",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA22BT/GMR-1-005",
+        "quantity": 2
+      }
+    ]
+  },
+  {
     "id": "goddess-of-victory-nikke",
     "name": "Neon (Yellow)",
     "title": "GODDESS OF VICTORY: NIKKE",
@@ -485,6 +1445,10 @@
     "events": 12,
     "sites": 2,
     "cards": [
+      {
+        "cardNumber": "PC02BT/NIK-2-015",
+        "quantity": 4
+      },
       {
         "cardNumber": "UE14BT/NIK-1-006",
         "quantity": 4
@@ -499,10 +1463,6 @@
       },
       {
         "cardNumber": "UE14BT/NIK-1-019",
-        "quantity": 4
-      },
-      {
-        "cardNumber": "UE14BT/NIK-1-027",
         "quantity": 4
       },
       {
@@ -522,20 +1482,148 @@
         "quantity": 2
       },
       {
+        "cardNumber": "UE14BT/NIK-1-027",
+        "quantity": 4
+      },
+      {
         "cardNumber": "UE14BT/NIK-1-104",
         "quantity": 4
       },
       {
-        "cardNumber": "UE14BT/NIK-1-023",
+        "cardNumber": "PC02BT/NIK-2-010",
         "quantity": 4
       },
       {
-        "cardNumber": "UE14BT/NIK-1-024",
+        "cardNumber": "PC02BT/NIK-2-017",
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "id": "gakuen-idolm@ster",
+    "name": "十王 星南 (Blue)",
+    "title": "Gakuen iDOLM@STER",
+    "color": "Blue",
+    "totalCards": 50,
+    "characters": 38,
+    "events": 12,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA27BT/GIM-1-020",
         "quantity": 4
       },
       {
-        "cardNumber": "UE14BT/NIK-1-003",
+        "cardNumber": "UA27BT/GIM-1-007",
         "quantity": 4
+      },
+      {
+        "cardNumber": "UA27BT/GIM-1-015",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA27BT/GIM-1-027",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA27BT/GIM-1-034",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA27BT/GIM-1-035",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA27BT/GIM-1-037",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA27BT/GIM-1-030",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA27BT/GIM-1-004",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA27BT/GIM-1-009",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA27BT/GIM-1-031",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA27BT/GIM-1-021",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA27BT/GIM-1-032",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "gintama",
+    "name": "坂田 銀時 (Red)",
+    "title": "Gintama",
+    "color": "Red",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA11ST/GNT-1-105",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA11BT/GNT-1-074",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA11ST/GNT-1-107",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA11BT/GNT-1-091",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA11ST/GNT-1-085",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA11ST/GNT-1-099",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA11ST/GNT-1-096",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA11ST/GNT-1-101",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA11BT/GNT-1-079",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA11BT/GNT-1-080",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA11BT/GNT-1-082",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA11BT/GNT-1-076",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA11ST/GNT-1-078",
+        "quantity": 2
       }
     ]
   },
@@ -603,6 +1691,134 @@
       },
       {
         "cardNumber": "UE02BT/HTR-1-094",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "haikyu!!",
+    "name": "影山 飛雄 (Red)",
+    "title": "Haikyu!!",
+    "color": "Red",
+    "totalCards": 50,
+    "characters": 40,
+    "events": 10,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA19ST/HIQ-1-104",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA19BT/HIQ-1-069",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA19BT/HIQ-1-072",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA19BT/HIQ-1-080",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA19ST/HIQ-1-100",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA19ST/HIQ-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA19ST/HIQ-1-105",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA19BT/HIQ-1-070",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA19BT/HIQ-1-093",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA19ST/HIQ-1-073",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA19ST/HIQ-1-107",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA19BT/HIQ-1-082",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA19ST/HIQ-1-099",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "hunter-x-hunter-(jp)",
+    "name": "クラピカ (Green)",
+    "title": "Hunter x Hunter (JP)",
+    "color": "Green",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA03BT/HTR-1-074",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA03BT/HTR-1-093",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX01BT/HTR-2-063",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA03ST/HTR-1-097",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA03ST/HTR-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX01BT/HTR-2-069",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA03ST/HTR-1-101",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA03ST/HTR-1-105",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA03BT/HTR-1-068",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA03BT/HTR-1-086",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA03BT/HTR-1-094",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX01BT/HTR-2-062",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX01BT/HTR-2-067",
         "quantity": 2
       }
     ]
@@ -676,6 +1892,70 @@
     ]
   },
   {
+    "id": "jujutsu-kaisen-(jp)",
+    "name": "宿儺 (Blue)",
+    "title": "Jujutsu Kaisen (JP)",
+    "color": "Blue",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "EX04BT/JJK-3-015",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA02BT/JJK-1-040",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA02BT/JJK-1-060",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA02ST/JJK-1-062",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA02ST/JJK-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX04BT/JJK-3-016",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX04BT/JJK-3-019",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA02BT/JJK-1-041",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA02BT/JJK-1-046",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA02BT/JJK-1-057",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA02ST/JJK-1-102",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA02BT/JJK-1-035",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX04BT/JJK-3-017",
+        "quantity": 2
+      }
+    ]
+  },
+  {
     "id": "kagurabachi",
     "name": "Kyora Sazanami (Purple)",
     "title": "KAGURABACHI",
@@ -730,11 +2010,11 @@
         "quantity": 4
       },
       {
-        "cardNumber": "UE16BT/KGR-1-020",
+        "cardNumber": "UA46BT/KGR-1-001",
         "quantity": 4
       },
       {
-        "cardNumber": "UE16BT/KGR-1-033",
+        "cardNumber": "UE16BT/KGR-1-020",
         "quantity": 4
       }
     ]
@@ -800,6 +2080,590 @@
       {
         "cardNumber": "UE12BT/KJ8-1-024",
         "quantity": 4
+      }
+    ]
+  },
+  {
+    "id": "kaiju-no.-8-(jp)",
+    "name": "亜白 ミナ (Yellow)",
+    "title": "Kaiju No. 8 (JP)",
+    "color": "Yellow",
+    "totalCards": 50,
+    "characters": 38,
+    "events": 12,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA28BT/KJ8-1-005",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA28BT/KJ8-1-023",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA28BT/KJ8-1-031",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA28BT/KJ8-1-008",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA28BT/KJ8-1-015",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA28BT/KJ8-1-040",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA28BT/KJ8-1-035",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA28BT/KJ8-1-036",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA28BT/KJ8-1-019",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA28BT/KJ8-1-021",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA28BT/KJ8-1-028",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA28BT/KJ8-1-024",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA28BT/KJ8-1-009",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "kamen-rider",
+    "name": "KAMEN RIDER ZI-O OHMAFORM (Yellow)",
+    "title": "Kamen Rider",
+    "color": "Yellow",
+    "totalCards": 50,
+    "characters": 38,
+    "events": 8,
+    "sites": 4,
+    "cards": [
+      {
+        "cardNumber": "EX12BT/KMR-2-019",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX12BT/KMR-2-002",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX12BT/KMR-2-003",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA29ST/KMR-1-104",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA29BT/KMR-1-008",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA29ST/KMR-1-033",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA29ST/KMR-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX12BT/KMR-2-013",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "EX12BT/KMR-2-014",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "UA29BT/KMR-1-013",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA29BT/KMR-1-020",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA29BT/KMR-1-022",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA29ST/KMR-1-103",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA29BT/KMR-1-011",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "kingdom",
+    "name": "Ou ki (Blue)",
+    "title": "Kingdom",
+    "color": "Blue",
+    "totalCards": 50,
+    "characters": 34,
+    "events": 12,
+    "sites": 4,
+    "cards": [
+      {
+        "cardNumber": "UA48BT/KGD-1-035",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA48BT/KGD-1-040",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA48BT/KGD-1-043",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA48BT/KGD-1-050",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA48ST/KGD-1-063",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA48ST/KGD-1-067",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA48BT/KGD-1-062",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA48ST/KGD-1-108",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "UA48BT/KGD-1-061",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "UA48BT/KGD-1-060",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA48ST/KGD-1-101",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA48ST/KGD-1-103",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA48BT/KGD-1-056",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA48ST/KGD-1-051",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "kinnikuman",
+    "name": "Black Hole (Purple)",
+    "title": "Kinnikuman",
+    "color": "Purple",
+    "totalCards": 50,
+    "characters": 36,
+    "events": 12,
+    "sites": 2,
+    "cards": [
+      {
+        "cardNumber": "UA39BT/KIN-1-011",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA39BT/KIN-1-015",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA39BT/KIN-1-020",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA39BT/KIN-1-022",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA39BT/KIN-1-034",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA39BT/KIN-1-035",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA39BT/KIN-1-036",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA39BT/KIN-1-032",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "UA39BT/KIN-1-026",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA39BT/KIN-1-003",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA39BT/KIN-1-007",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA39BT/KIN-1-004",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA39BT/KIN-1-017",
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "id": "macross-series",
+    "name": "YF-19（イサム・ダイソン） (Blue)",
+    "title": "Macross Series",
+    "color": "Blue",
+    "totalCards": 50,
+    "characters": 38,
+    "events": 12,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA36BT/MCR-1-043",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA36BT/MCR-1-045",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA36BT/MCR-1-063",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA36ST/MCR-1-065",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA36ST/MCR-1-066",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA36BT/MCR-1-049",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA36ST/MCR-1-103",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA36ST/MCR-1-105",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA36ST/MCR-1-106",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA36BT/MCR-1-038",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA36BT/MCR-1-041",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA36BT/MCR-1-042",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA36ST/MCR-1-058",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "madoka-magica",
+    "name": "暁美 ほむら (Red)",
+    "title": "Madoka Magica",
+    "color": "Red",
+    "totalCards": 50,
+    "characters": 36,
+    "events": 14,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA31ST/MMM-1-102",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA31BT/MMM-1-071",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA31BT/MMM-1-078",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA31BT/MMM-1-090",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA31ST/MMM-1-094",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA31ST/MMM-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA31ST/MMM-1-105",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA31BT/MMM-1-068",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA31ST/MMM-1-069",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA31ST/MMM-1-085",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA31ST/MMM-1-070",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA31ST/MMM-1-095",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA31BT/MMM-1-093",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "me-&-roboco",
+    "name": "ロボコ (Yellow)",
+    "title": "Me & Roboco",
+    "color": "Yellow",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA09ST/BTR-1-106",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA09BT/BTR-1-008",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA09BT/BTR-1-024",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA09ST/BTR-1-104",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA09ST/BTR-1-030",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA09ST/BTR-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA09BT/BTR-1-017",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA09BT/BTR-1-004",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA09BT/BTR-1-018",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA09ST/BTR-1-026",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA09ST/BTR-1-102",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA09ST/BTR-1-103",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA09BT/BTR-1-002",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "my-hero-academia",
+    "name": "緑谷 出久 (Green)",
+    "title": "My Hero Academia",
+    "color": "Green",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA10ST/MHA-1-107",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA10BT/MHA-1-038",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA10BT/MHA-1-048",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA10BT/MHA-1-051",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA10ST/MHA-1-063",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA10ST/MHA-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA10ST/MHA-1-052",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA10ST/MHA-1-101",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA10BT/MHA-1-037",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA10BT/MHA-1-047",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX06BT/MHA-2-050",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA10ST/MHA-1-034",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA10ST/MHA-1-104",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "nikke-(jp)",
+    "name": "マリアン (Yellow)",
+    "title": "NIKKE (JP)",
+    "color": "Yellow",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA18ST/NIK-1-104",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA18ST/NIK-1-106",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA18BT/NIK-1-006",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA18BT/NIK-1-018",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA18ST/NIK-1-031",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA18ST/NIK-1-029",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA18BT/NIK-1-019",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA18BT/NIK-1-027",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA18BT/NIK-1-023",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA18BT/NIK-1-024",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA18ST/NIK-1-101",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA18BT/NIK-1-003",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA18BT/NIK-1-012",
+        "quantity": 2
       }
     ]
   },
@@ -872,14 +2736,206 @@
     ]
   },
   {
+    "id": "one-punch-man-(jp)",
+    "name": "ジェノス (Yellow)",
+    "title": "One Punch Man (JP)",
+    "color": "Yellow",
+    "totalCards": 50,
+    "characters": 36,
+    "events": 14,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA35ST/OPM-1-017",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA35BT/OPM-1-004",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA35ST/OPM-1-102",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA35ST/OPM-1-104",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA35ST/OPM-1-029",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA35ST/OPM-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA35BT/OPM-1-010",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA35BT/OPM-1-002",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA35ST/OPM-1-107",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA35BT/OPM-1-024",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA35ST/OPM-1-105",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA35ST/OPM-1-032",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA35BT/OPM-1-030",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "rezero--starting-life-in-another-world-",
+    "name": "Emilia (Yellow)",
+    "title": "Re:ZERO -Starting Life in Another World-",
+    "color": "Yellow",
+    "totalCards": 50,
+    "characters": 36,
+    "events": 12,
+    "sites": 2,
+    "cards": [
+      {
+        "cardNumber": "UA40ST/REZ-1-106",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA40BT/REZ-1-011",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA40BT/REZ-1-017",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA40ST/REZ-1-029",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA40ST/REZ-1-033",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA40BT/REZ-1-029",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA40ST/REZ-1-108",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "UA40ST/REZ-1-107",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA40BT/REZ-1-003",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA40BT/REZ-1-021",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA40ST/REZ-1-001",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA40BT/REZ-1-005",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA40ST/REZ-1-101",
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "id": "reincarnated-as-a-slime",
+    "name": "リムル (Blue)",
+    "title": "Reincarnated as a Slime",
+    "color": "Blue",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA07ST/TSK-1-035",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA07ST/TSK-1-107",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA07BT/TSK-1-056",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA07ST/TSK-1-067",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA07ST/TSK-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA07BT/TSK-1-060",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX09BT/TSK-2-015",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX09BT/TSK-2-022",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA07BT/TSK-1-039",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA07ST/TSK-1-105",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA07BT/TSK-1-048",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX09BT/TSK-2-013",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA07ST/TSK-1-037",
+        "quantity": 2
+      }
+    ]
+  },
+  {
     "id": "rurouni-kenshin",
     "name": "Kenshin Himura (Red)",
     "title": "Rurouni Kenshin",
     "color": "Red",
     "totalCards": 50,
-    "characters": 38,
+    "characters": 40,
     "events": 8,
-    "sites": 4,
+    "sites": 2,
     "cards": [
       {
         "cardNumber": "UE11ST/RNK-1-102",
@@ -906,10 +2962,6 @@
         "quantity": 2
       },
       {
-        "cardNumber": "UE11BT/RNK-1-094",
-        "quantity": 2
-      },
-      {
         "cardNumber": "UE11ST/RNK-1-104",
         "quantity": 4
       },
@@ -926,7 +2978,7 @@
         "quantity": 4
       },
       {
-        "cardNumber": "UE11ST/RNK-1-107",
+        "cardNumber": "UA41BT/RNK-1-092",
         "quantity": 4
       },
       {
@@ -935,7 +2987,7 @@
       },
       {
         "cardNumber": "UE11ST/RNK-1-078",
-        "quantity": 2
+        "quantity": 4
       }
     ]
   },
@@ -966,7 +3018,7 @@
         "quantity": 4
       },
       {
-        "cardNumber": "UE19BT/SMD-1-030",
+        "cardNumber": "UA43BT/SMD-1-008",
         "quantity": 4
       },
       {
@@ -990,19 +3042,83 @@
         "quantity": 2
       },
       {
+        "cardNumber": "UA43BT/SMD-1-017",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA43BT/SMD-1-025",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UE19BT/SMD-1-030",
+        "quantity": 4
+      },
+      {
         "cardNumber": "UE19BT/SMD-1-010",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "shy",
+    "name": "シャイ (Red)",
+    "title": "SHY",
+    "color": "Red",
+    "totalCards": 50,
+    "characters": 38,
+    "events": 12,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA24BT/SHY-1-054",
         "quantity": 4
       },
       {
-        "cardNumber": "UE19BT/SMD-1-032",
+        "cardNumber": "UA24BT/SHY-1-051",
         "quantity": 4
       },
       {
-        "cardNumber": "UE19BT/SMD-1-019",
+        "cardNumber": "UA24BT/SHY-1-056",
         "quantity": 4
       },
       {
-        "cardNumber": "UE19BT/SMD-1-002",
+        "cardNumber": "UA24BT/SHY-1-064",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA24BT/SHY-1-074",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA24BT/SHY-1-075",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA24BT/SHY-1-076",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA24BT/SHY-1-046",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA24BT/SHY-1-069",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA24BT/SHY-1-058",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA24BT/SHY-1-071",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA24BT/SHY-1-060",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA24BT/SHY-1-043",
         "quantity": 2
       }
     ]
@@ -1076,6 +3192,198 @@
     ]
   },
   {
+    "id": "synduality-noir",
+    "name": "デイジーオーガ (Yellow)",
+    "title": "SYNDUALITY Noir",
+    "color": "Yellow",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA16ST/SYN-1-102",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA16ST/SYN-1-103",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA16BT/SYN-1-006",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA16BT/SYN-1-008",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA16ST/SYN-1-032",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA16ST/SYN-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA16ST/SYN-1-010",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA16ST/SYN-1-101",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA16ST/SYN-1-105",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA16BT/SYN-1-019",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA16BT/SYN-1-020",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA16BT/SYN-1-018",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA16BT/SYN-1-023",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "shangri-la-frontier",
+    "name": "サイガ-0 (Green)",
+    "title": "Shangri-La Frontier",
+    "color": "Green",
+    "totalCards": 50,
+    "characters": 38,
+    "events": 12,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA32BT/SNF-1-011",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA32BT/SNF-1-024",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA32BT/SNF-1-026",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA32BT/SNF-1-015",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA32BT/SNF-1-032",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA32BT/SNF-1-033",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA32BT/SNF-1-034",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA32BT/SNF-1-003",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA32BT/SNF-1-001",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA32BT/SNF-1-002",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA32BT/SNF-1-019",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA32BT/SNF-1-009",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA32BT/SNF-1-017",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "solo-leveling-(jp)",
+    "name": "水篠 旬 (Purple)",
+    "title": "Solo Leveling (JP)",
+    "color": "Purple",
+    "totalCards": 50,
+    "characters": 38,
+    "events": 12,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA51BT/SLG-1-022",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA51BT/SLG-1-011",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA51BT/SLG-1-023",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA51BT/SLG-1-033",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA51BT/SLG-1-003",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA51BT/SLG-1-038",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA51BT/SLG-1-039",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA51BT/SLG-1-040",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA51BT/SLG-1-006",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA51BT/SLG-1-012",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA51BT/SLG-1-024",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA51BT/SLG-1-029",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA51BT/SLG-1-031",
+        "quantity": 2
+      }
+    ]
+  },
+  {
     "id": "sword-art-online",
     "name": "Kirito (Blue)",
     "title": "Sword Art Online",
@@ -1140,6 +3448,522 @@
       {
         "cardNumber": "UE07ST/SAO-1-105",
         "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "sword-art-online-(jp)",
+    "name": "キリト (Blue)",
+    "title": "Sword Art Online (JP)",
+    "color": "Blue",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA15ST/SAO-1-104",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA15BT/SAO-1-037",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX08BT/SAO-2-018",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA15ST/SAO-1-065",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA15ST/SAO-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX08BT/SAO-2-024",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA15ST/SAO-1-102",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA15BT/SAO-1-043",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA15BT/SAO-1-048",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA15BT/SAO-1-050",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA15ST/SAO-1-042",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA15ST/SAO-1-105",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA15BT/SAO-1-054",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "tekken-7",
+    "name": "三島 一美 (Red)",
+    "title": "TEKKEN 7",
+    "color": "Red",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA13BT/TKN-1-081",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA13BT/TKN-1-087",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA13BT/TKN-1-090",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA13BT/TKN-1-076",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA13BT/TKN-1-077",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA13ST/TKN-1-097",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA13ST/TKN-1-099",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA13ST/TKN-1-094",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA13ST/TKN-1-105",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA13BT/TKN-1-071",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA13BT/TKN-1-083",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA13ST/TKN-1-068",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA13ST/TKN-1-101",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "the-idolm@ster-gakuen",
+    "name": "TSUBAME AMAYA (Yellow)",
+    "title": "THE IDOLM@STER Gakuen",
+    "color": "Yellow",
+    "totalCards": 50,
+    "characters": 36,
+    "events": 12,
+    "sites": 2,
+    "cards": [
+      {
+        "cardNumber": "EX13BT/GIM-2-012",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX13BT/GIM-2-020",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX13BT/GIM-2-024",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX13BT/GIM-2-026",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX13BT/GIM-2-031",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX13BT/GIM-2-037",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX13BT/GIM-2-039",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX13BT/GIM-2-041",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX13BT/GIM-2-035",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "EX13BT/GIM-2-013",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX13BT/GIM-2-027",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX13BT/GIM-2-005",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "EX13BT/GIM-2-007",
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "id": "the-idolm@ster-shiny-colors",
+    "name": "Nichika Nanakusa (Yellow)",
+    "title": "THE IDOLM@STER SHINY COLORS",
+    "color": "Yellow",
+    "totalCards": 50,
+    "characters": 40,
+    "events": 8,
+    "sites": 2,
+    "cards": [
+      {
+        "cardNumber": "UA04ST/IMS-1-105",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA04BT/IMS-1-007",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA04BT/IMS-1-013",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA04BT/IMS-1-021",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA04BT/IMS-1-025",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA04ST/IMS-1-028",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA04BT/IMS-1-029",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA04ST/IMS-1-109",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "EX03BT/IMS-2-010",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "PC01BT/IMS-3-003",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "PC01BT/IMS-3-004",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "PC01BT/IMS-3-005",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA04BT/IMS-1-004",
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "id": "tales-of-arise",
+    "name": "Alphen (Red)",
+    "title": "Tales of Arise",
+    "color": "Red",
+    "totalCards": 50,
+    "characters": 34,
+    "events": 12,
+    "sites": 4,
+    "cards": [
+      {
+        "cardNumber": "UA06ST/TOA-1-102",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA06BT/TOA-1-092",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA06BT/TOA-1-083",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA06ST/TOA-1-075",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA06ST/TOA-1-096",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA06ST/TOA-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA06BT/TOA-1-096",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA06ST/TOA-1-108",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "UA06BT/TOA-1-093",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "UA06BT/TOA-1-072",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA06BT/TOA-1-085",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA06ST/TOA-1-080",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA06ST/TOA-1-105",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA06ST/TOA-1-104",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "the-100-girlfriends",
+    "name": "花園 羽々里 (Yellow)",
+    "title": "The 100 Girlfriends",
+    "color": "Yellow",
+    "totalCards": 50,
+    "characters": 28,
+    "events": 22,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA26BT/RLY-1-032",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA26BT/RLY-1-008",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA26BT/RLY-1-012",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA26BT/RLY-1-024",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA26BT/RLY-1-034",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA26BT/RLY-1-037",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA26BT/RLY-1-039",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA26BT/RLY-1-018",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA26BT/RLY-1-001",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA26BT/RLY-1-014",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA26BT/RLY-1-041",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA26BT/RLY-1-035",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA26BT/RLY-1-036",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "the-eminence-in-shadow",
+    "name": "シャドウ (Purple)",
+    "title": "The Eminence in Shadow",
+    "color": "Purple",
+    "totalCards": 50,
+    "characters": 38,
+    "events": 12,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA52BT/KJN-1-049",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA52BT/KJN-1-053",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA52BT/KJN-1-069",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA52BT/KJN-1-076",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA52BT/KJN-1-078",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA52BT/KJN-1-079",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA52BT/KJN-1-074",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA52BT/KJN-1-051",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA52BT/KJN-1-061",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA52BT/KJN-1-045",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA52BT/KJN-1-057",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA52BT/KJN-1-062",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA52BT/KJN-1-065",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "to-love-ru-memory-of-heroines",
+    "name": "Darkness (Yellow)",
+    "title": "To LOVE Ru Memory of Heroines",
+    "color": "Yellow",
+    "totalCards": 50,
+    "characters": 36,
+    "events": 12,
+    "sites": 2,
+    "cards": [
+      {
+        "cardNumber": "UA45BT/TLR-1-030",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA45BT/TLR-1-007",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA45BT/TLR-1-018",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA45BT/TLR-1-023",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA45BT/TLR-1-035",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA45BT/TLR-1-037",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA45BT/TLR-1-039",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA45BT/TLR-1-040",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA45BT/TLR-1-036",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "UA45BT/TLR-1-005",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA45BT/TLR-1-006",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA45BT/TLR-1-013",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA45BT/TLR-1-026",
+        "quantity": 4
       }
     ]
   },
@@ -1212,6 +4036,262 @@
     ]
   },
   {
+    "id": "toriko",
+    "name": "トリコ (Blue)",
+    "title": "Toriko",
+    "color": "Blue",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA17ST/TRK-1-041",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA17ST/TRK-1-104",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA17ST/TRK-1-106",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA17BT/TRK-1-046",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA17ST/TRK-1-062",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA17ST/TRK-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA17BT/TRK-1-059",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA17ST/TRK-1-102",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA17ST/TRK-1-103",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA17BT/TRK-1-034",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA17BT/TRK-1-037",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA17BT/TRK-1-038",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA17BT/TRK-1-048",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "undead-unluck",
+    "name": "ヴィクトル (Purple)",
+    "title": "Undead Unluck",
+    "color": "Purple",
+    "totalCards": 50,
+    "characters": 38,
+    "events": 12,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA25BT/AND-1-013",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA25BT/AND-1-017",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA25BT/AND-1-023",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA25BT/AND-1-027",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA25BT/AND-1-038",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA25BT/AND-1-034",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA25BT/AND-1-035",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA25BT/AND-1-002",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA25BT/AND-1-032",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA25BT/AND-1-004",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA25BT/AND-1-009",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA25BT/AND-1-019",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA25BT/AND-1-021",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "wind-breaker",
+    "name": "Hayato Suo (Green)",
+    "title": "WIND BREAKER",
+    "color": "Green",
+    "totalCards": 50,
+    "characters": 36,
+    "events": 12,
+    "sites": 2,
+    "cards": [
+      {
+        "cardNumber": "UA38BT/WBK-1-054",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA38BT/WBK-1-061",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA38BT/WBK-1-063",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA38BT/WBK-1-073",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA38BT/WBK-1-075",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA38BT/WBK-1-077",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA38BT/WBK-1-078",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA38BT/WBK-1-074",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "UA38BT/WBK-1-046",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA38BT/WBK-1-047",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA38BT/WBK-1-050",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA38BT/WBK-1-051",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA38BT/WBK-1-043",
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "id": "yu-yu-hakusho-(jp)",
+    "name": "浦飯 幽助 (Green)",
+    "title": "Yu Yu Hakusho (JP)",
+    "color": "Green",
+    "totalCards": 50,
+    "characters": 42,
+    "events": 8,
+    "sites": 0,
+    "cards": [
+      {
+        "cardNumber": "UA21BT/YYH-1-038",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA21BT/YYH-1-047",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA21ST/YYH-1-104",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA21ST/YYH-1-107",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA21ST/YYH-1-065",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA21ST/YYH-1-109",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA21BT/YYH-1-043",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA21BT/YYH-1-050",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA21BT/YYH-1-052",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA21BT/YYH-1-062",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA21ST/YYH-1-057",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA21BT/YYH-1-051",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA21ST/YYH-1-101",
+        "quantity": 2
+      }
+    ]
+  },
+  {
     "id": "yu-yu-hakusho-ghost-files",
     "name": "Yusuke Urameshi (Green)",
     "title": "Yu Yu Hakusho: Ghost Files",
@@ -1275,6 +4355,74 @@
       },
       {
         "cardNumber": "UE13BT/YYH-1-051",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "〈monogatari〉-series",
+    "name": "Shinobu Oshino (Purple)",
+    "title": "〈Monogatari〉 Series",
+    "color": "Purple",
+    "totalCards": 50,
+    "characters": 34,
+    "events": 12,
+    "sites": 4,
+    "cards": [
+      {
+        "cardNumber": "UA42ST/MGS-1-049",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA42ST/MGS-1-104",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA42BT/MGS-1-047",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA42BT/MGS-1-052",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA42ST/MGS-1-064",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA42ST/MGS-1-067",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA42BT/MGS-1-063",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA42ST/MGS-1-109",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "UA42BT/MGS-1-062",
+        "quantity": 2
+      },
+      {
+        "cardNumber": "UA42BT/MGS-1-060",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA42ST/MGS-1-107",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA42BT/MGS-1-034",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA42BT/MGS-1-037",
+        "quantity": 4
+      },
+      {
+        "cardNumber": "UA42ST/MGS-1-054",
         "quantity": 2
       }
     ]
