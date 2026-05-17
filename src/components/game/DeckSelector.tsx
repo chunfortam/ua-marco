@@ -3,41 +3,21 @@
 import { useState, useEffect } from 'react';
 import type { Deck } from '@/lib/types';
 import { loadDecksFromStorage, importDeckFromText } from '@/lib/deck';
+import sampleDecksData from '@/data/sample-decks.json';
 
-const SAMPLE_DECKS: { name: string; description: string; cards: string[] }[] = [
-  {
-    name: 'Suzaku Aggro (Purple)',
-    description: 'Fast purple deck focused on Suzaku Kururugi and Lancelot mechs. 50 cards.',
-    cards: [
-      // 4x CGH-1-034 Suzaku Kururugi
-      ...Array(4).fill('UE04BT/CGH-1-034'),
-      // 4x CGH-1-035 Suzaku Kururugi
-      ...Array(4).fill('UE04BT/CGH-1-035'),
-      // 4x CGH-1-036 Suzaku Kururugi
-      ...Array(4).fill('UE04BT/CGH-1-036'),
-      // 4x CGH-1-038 Cornelia li Britannia
-      ...Array(4).fill('UE04BT/CGH-1-038'),
-      // 4x CGH-1-042 Cécile Croomy
-      ...Array(4).fill('UE04BT/CGH-1-042'),
-      // 2x CGH-1-048 Lloyd Asplund
-      ...Array(2).fill('UE04BT/CGH-1-048'),
-      // 4x CGH-1-055 Gloucester (Cornelia Fighter)
-      ...Array(4).fill('UE04BT/CGH-1-055'),
-      // 4x CGH-1-059 Lancelot
-      ...Array(4).fill('UE04BT/CGH-1-059'),
-      // 4x CGH-1-060 Lancelot Air Cavalry
-      ...Array(4).fill('UE04BT/CGH-1-060'),
-      // 4x CGH-2-052 Nunnally vi Britannia
-      ...Array(4).fill('UEX03BT/CGH-2-052'),
-      // 4x CGH-2-053 Anya Alstreim
-      ...Array(4).fill('UEX03BT/CGH-2-053'),
-      // 4x CGH-1-062 Live!
-      ...Array(4).fill('UE04BT/CGH-1-062'),
-      // 4x CGH-1-063 V.A.R.I.S.
-      ...Array(4).fill('UE04BT/CGH-1-063'),
-    ],
-  },
-];
+interface SampleDeckEntry {
+  id: string;
+  name: string;
+  title: string;
+  color: string;
+  totalCards: number;
+  characters: number;
+  events: number;
+  sites: number;
+  cards: { cardNumber: string; quantity: number }[];
+}
+
+const SAMPLE_DECKS: SampleDeckEntry[] = sampleDecksData as SampleDeckEntry[];
 
 interface DeckSelectorProps {
   onDeckSelect: (deckCards: string[]) => void;
@@ -106,22 +86,30 @@ export function DeckSelector({ onDeckSelect }: DeckSelectorProps) {
 
       <div className="p-6">
         {tab === 'sample' && (
-          <div className="space-y-3">
-            {SAMPLE_DECKS.map((deck, i) => (
-              <button
-                key={i}
-                onClick={() => onDeckSelect(deck.cards)}
-                className="w-full text-left p-4 bg-surface border border-card-border rounded-lg hover:border-accent transition-colors group"
-              >
-                <div className="flex justify-between items-center">
-                  <div>
-                    <p className="font-medium group-hover:text-accent-light transition-colors">{deck.name}</p>
-                    <p className="text-sm text-muted">{deck.description}</p>
+          <div className="space-y-2 max-h-[400px] overflow-y-auto pr-1">
+            {SAMPLE_DECKS.map((deck) => {
+              const expandedCards: string[] = [];
+              for (const c of deck.cards) {
+                for (let i = 0; i < c.quantity; i++) {
+                  expandedCards.push(c.cardNumber);
+                }
+              }
+              return (
+                <button
+                  key={deck.id}
+                  onClick={() => onDeckSelect(expandedCards)}
+                  className="w-full text-left p-3 bg-surface border border-card-border rounded-lg hover:border-accent transition-colors group"
+                >
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <p className="font-medium text-sm group-hover:text-accent-light transition-colors">{deck.title}</p>
+                      <p className="text-xs text-muted">{deck.name} &middot; {deck.totalCards} cards ({deck.characters}C/{deck.events}E/{deck.sites}S)</p>
+                    </div>
+                    <span className="text-accent text-xs shrink-0 ml-2">Select &rarr;</span>
                   </div>
-                  <span className="text-accent text-sm">Select &rarr;</span>
-                </div>
-              </button>
-            ))}
+                </button>
+              );
+            })}
           </div>
         )}
 
