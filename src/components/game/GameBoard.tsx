@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import type { SanitizedGameState, PlayerAction, FieldCard, CardInstance, PendingAction } from '@/lib/game/types';
+import type { SanitizedGameState, PlayerAction, LifeCardState } from '@/lib/game/types';
 import { CardSlot } from './CardSlot';
 import { HandDisplay } from './HandDisplay';
 import { PhaseBar } from './PhaseBar';
@@ -29,45 +29,31 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
   const handleFieldCardClick = useCallback((instanceId: string, isYours: boolean) => {
     if (!isYours && !isWaitingOnYou) return;
 
-    // Block selection
     if (pendingAction?.type === 'BLOCK_DECISION' && isYours) {
       sendAction({ type: 'BLOCK', blockerInstanceId: instanceId });
       return;
     }
-
-    // Snipe target selection
     if (pendingAction?.type === 'SNIPE_CHOOSE' && !isYours) {
       sendAction({ type: 'SNIPE_TARGET', targetInstanceId: instanceId });
       return;
     }
-
-    // Active trigger: choose resting character to activate
     if (pendingAction?.type === 'ACTIVE_TRIGGER_CHOOSE' && isYours) {
       sendAction({ type: 'CHOOSE_ACTIVE_TARGET', cardInstanceId: instanceId });
       return;
     }
-
-    // Color trigger: choose eligible character to play from remove area (handled in zone view)
-
-    // Attack declaration
     if (phase === 'ATTACK' && isYourTurn && isYours) {
       sendAction({ type: 'DECLARE_ATTACK', attackerInstanceId: instanceId });
       return;
     }
-
-    // Movement: select card to move to front or step to energy
     if (phase === 'MOVEMENT' && isYourTurn && isYours) {
       setSelectedCard((prev) => (prev === instanceId ? null : instanceId));
       return;
     }
-
-    // Main phase: select for RAID target
     if (phase === 'MAIN' && isYourTurn && isYours && selectedCard) {
       sendAction({ type: 'RAID', cardInstanceId: selectedCard, targetInstanceId: instanceId, moveToFront: false });
       setSelectedCard(null);
       return;
     }
-
     setSelectedCard((prev) => (prev === instanceId ? null : instanceId));
   }, [isWaitingOnYou, pendingAction, phase, isYourTurn, selectedCard, sendAction]);
 
@@ -79,13 +65,10 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
       });
       return;
     }
-
-    // Main phase: play card
     if (phase === 'MAIN' && isYourTurn) {
       setSelectedCard((prev) => (prev === instanceId ? null : instanceId));
       return;
     }
-
     setSelectedCard((prev) => (prev === instanceId ? null : instanceId));
   }, [pendingAction, phase, isYourTurn]);
 
@@ -109,10 +92,8 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
 
   return (
     <div className="h-[calc(100vh-4rem)] flex flex-col bg-background overflow-hidden relative">
-      {/* Game Over Overlay */}
       {winner && <GameOverlay winner={winner} winReason={winReason} yourKey={yourKey} />}
 
-      {/* Error Banner */}
       {error && (
         <div className="absolute top-2 left-1/2 -translate-x-1/2 z-50 px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm flex items-center gap-2 animate-fade-in">
           <span>{error}</span>
@@ -120,211 +101,196 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
         </div>
       )}
 
-      {/* Phase Bar */}
-      <PhaseBar
-        phase={phase}
-        turn={turn}
-        isYourTurn={isYourTurn}
-        activePlayer={activePlayer}
-        yourKey={yourKey}
-      />
+      <PhaseBar phase={phase} turn={turn} isYourTurn={isYourTurn} activePlayer={activePlayer} yourKey={yourKey} />
 
-      {/* Opponent's Field (top half) */}
+      {/* Main board area */}
       <div className="flex-1 flex flex-col min-h-0">
-        {/* Opponent Info */}
-        <div className="px-4 py-1 flex items-center justify-between text-sm">
-          <div className="flex items-center gap-3">
-            <span className="text-muted">Opponent</span>
-            <div className="flex gap-1">
-              {opponent.ap.map((ap, i) => (
-                <div
-                  key={i}
-                  className={`w-5 h-7 rounded text-xs flex items-center justify-center font-bold border ${
-                    ap.active ? 'bg-yellow-500/30 border-yellow-500 text-yellow-400' : 'bg-card-bg border-card-border text-muted'
-                  }`}
-                >
-                  AP
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="flex items-center gap-4 text-xs text-muted">
-            <button onClick={() => { setViewingZone('deck'); setViewingPlayer('opponent'); }} className="hover:text-foreground">
-              Deck: {opponent.deckCount}
-            </button>
-            <span>Hand: {opponent.handCount}</span>
-            <button onClick={() => { setViewingZone('remove'); setViewingPlayer('opponent'); }} className="hover:text-foreground">
-              Remove: {opponent.removeArea.length}
-            </button>
-            <button onClick={() => { setViewingZone('sideline'); setViewingPlayer('opponent'); }} className="hover:text-foreground">
-              Sideline: {opponent.sidelineArea.length}
-            </button>
-          </div>
-        </div>
 
-        {/* Opponent Life Cards */}
-        <div className="px-4 py-1">
-          <div className="flex items-center gap-1 min-h-[36px]">
-            <span className="text-xs text-muted w-16 shrink-0">Life</span>
-            <div className="flex gap-1 flex-1 justify-center">
-              {opponent.lifeCards.map((lc) => {
-                const isFlipTarget = pendingAction?.type === 'CHOOSE_LIFE_TO_FLIP' && pendingAction.damagedPlayer !== yourKey && isWaitingOnYou;
-                return (
-                  <button
-                    key={lc.index}
-                    onClick={() => isFlipTarget && sendAction({ type: 'FLIP_LIFE_CARD', lifeIndex: lc.index })}
-                    className={`w-8 h-11 rounded border-2 flex items-center justify-center text-[8px] font-bold transition-all ${
-                      isFlipTarget
-                        ? 'border-red-500 bg-red-500/20 text-red-400 cursor-pointer hover:scale-110 hover:bg-red-500/30 animate-pulse'
-                        : 'border-card-border bg-card-bg text-muted cursor-default'
+        {/* ═══════ OPPONENT'S FIELD (mirrored: AP bottom, Energy, Front top) ═══════ */}
+        <div className="flex flex-row px-2 py-1 gap-1 items-stretch" style={{ flex: '0 0 auto' }}>
+
+          {/* Opponent Life Area (left column) */}
+          <LifeColumn
+            lifeCards={opponent.lifeCards}
+            label="Opp Life"
+            flippable={pendingAction?.type === 'CHOOSE_LIFE_TO_FLIP' && pendingAction.damagedPlayer !== yourKey && isWaitingOnYou}
+            onFlip={(index) => sendAction({ type: 'FLIP_LIFE_CARD', lifeIndex: index })}
+            mirrored
+          />
+
+          {/* Opponent center: AP → Energy → Front (reversed for opponent view) */}
+          <div className="flex-1 flex flex-col gap-1">
+            {/* Opponent AP */}
+            <div className="flex items-center justify-center gap-1">
+              <span className="text-[10px] text-muted w-8 shrink-0">AP</span>
+              <div className="flex gap-1">
+                {opponent.ap.map((ap, i) => (
+                  <div
+                    key={i}
+                    className={`w-[40px] h-[56px] rounded border-2 text-[9px] flex items-center justify-center font-bold ${
+                      ap.active ? 'bg-yellow-500/20 border-yellow-500/60 text-yellow-400' : 'bg-card-bg border-card-border text-muted rotate-90'
                     }`}
                   >
-                    ?
-                  </button>
-                );
-              })}
-              {opponent.lifeCards.length === 0 && <span className="text-xs text-red-400">No life!</span>}
+                    AP
+                  </div>
+                ))}
+              </div>
             </div>
+
+            {/* Opponent Energy Line */}
+            <div className="flex items-center justify-center gap-1">
+              <span className="text-[10px] text-muted w-8 shrink-0">Engy</span>
+              <div className="flex gap-1 justify-center flex-wrap">
+                {opponent.energyLine.map((card) => (
+                  <CardSlot
+                    key={card.instanceId}
+                    card={card}
+                    isYours={false}
+                    isSelected={selectedCard === card.instanceId}
+                    onClick={() => handleFieldCardClick(card.instanceId, false)}
+                    size="sm"
+                  />
+                ))}
+                {opponent.energyLine.length === 0 && <EmptySlots count={4} size="sm" />}
+              </div>
+            </div>
+
+            {/* Opponent Front Line */}
+            <div className="flex items-center justify-center gap-1">
+              <span className="text-[10px] text-muted w-8 shrink-0">Front</span>
+              <div className="flex gap-2 justify-center flex-wrap">
+                {opponent.frontLine.map((card) => (
+                  <CardSlot
+                    key={card.instanceId}
+                    card={card}
+                    isYours={false}
+                    isSelected={selectedCard === card.instanceId}
+                    onClick={() => handleFieldCardClick(card.instanceId, false)}
+                    size="md"
+                  />
+                ))}
+                {opponent.frontLine.length === 0 && <EmptySlots count={4} size="md" />}
+              </div>
+            </div>
+          </div>
+
+          {/* Opponent right column: Deck (top) + Sideline (bottom) */}
+          <div className="flex flex-col gap-1 w-[72px] items-center">
+            <button onClick={() => { setViewingZone('deck'); setViewingPlayer('opponent'); }}
+              className="w-[56px] h-[72px] rounded-lg border-2 border-card-border bg-card-bg flex flex-col items-center justify-center text-[9px] text-muted hover:border-accent transition-colors">
+              <span className="font-bold">Deck</span>
+              <span>{opponent.deckCount}</span>
+            </button>
+            <span className="text-[9px] text-muted">Hand: {opponent.handCount}</span>
+            <button onClick={() => { setViewingZone('sideline'); setViewingPlayer('opponent'); }}
+              className="w-[56px] h-[48px] rounded-lg border-2 border-dashed border-card-border bg-card-bg/50 flex flex-col items-center justify-center text-[9px] text-muted hover:border-accent transition-colors">
+              <span>Side</span>
+              <span>{opponent.sidelineArea.length}</span>
+            </button>
+            <button onClick={() => { setViewingZone('remove'); setViewingPlayer('opponent'); }}
+              className="w-[56px] h-[48px] rounded-lg border-2 border-dashed border-card-border bg-card-bg/50 flex flex-col items-center justify-center text-[9px] text-muted hover:border-accent transition-colors">
+              <span>Rmv</span>
+              <span>{opponent.removeArea.length}</span>
+            </button>
           </div>
         </div>
 
-        {/* Opponent Energy Line */}
-        <div className="px-4 py-1">
-          <div className="flex items-center gap-1 min-h-[60px]">
-            <span className="text-xs text-muted w-16 shrink-0">Energy</span>
-            <div className="flex gap-1 flex-1 justify-center">
-              {opponent.energyLine.map((card) => (
-                <CardSlot
-                  key={card.instanceId}
-                  card={card}
-                  isYours={false}
-                  isSelected={selectedCard === card.instanceId}
-                  onClick={() => handleFieldCardClick(card.instanceId, false)}
-                  size="sm"
-                />
-              ))}
-              {opponent.energyLine.length === 0 && <EmptySlots count={4} size="sm" />}
-            </div>
-          </div>
-        </div>
-
-        {/* Opponent Front Line */}
-        <div className="px-4 py-1">
-          <div className="flex items-center gap-1 min-h-[80px]">
-            <span className="text-xs text-muted w-16 shrink-0">Front</span>
-            <div className="flex gap-2 flex-1 justify-center">
-              {opponent.frontLine.map((card) => (
-                <CardSlot
-                  key={card.instanceId}
-                  card={card}
-                  isYours={false}
-                  isSelected={selectedCard === card.instanceId}
-                  onClick={() => handleFieldCardClick(card.instanceId, false)}
-                  size="md"
-                />
-              ))}
-              {opponent.frontLine.length === 0 && <EmptySlots count={4} size="md" />}
-            </div>
-          </div>
-        </div>
-
-        {/* Divider */}
+        {/* ═══════ BATTLE ZONE DIVIDER ═══════ */}
         <div className="border-t border-card-border mx-4 my-1 relative">
           <div className="absolute left-1/2 -translate-x-1/2 -top-3 bg-background px-3 text-xs text-muted">
             &#x2694; Battle Zone &#x2694;
           </div>
         </div>
 
-        {/* Your Front Line */}
-        <div className="px-4 py-1">
-          <div className="flex items-center gap-1 min-h-[80px]">
-            <span className="text-xs text-muted w-16 shrink-0">Front</span>
-            <div className="flex gap-2 flex-1 justify-center">
-              {you.frontLine.map((card) => (
-                <CardSlot
-                  key={card.instanceId}
-                  card={card}
-                  isYours={true}
-                  isSelected={selectedCard === card.instanceId}
-                  onClick={() => handleFieldCardClick(card.instanceId, true)}
-                  size="md"
-                  showActions={phase === 'MOVEMENT' && isYourTurn && selectedCard === card.instanceId}
-                  onMoveAction={handleStepToEnergy}
-                  moveLabel="Step →"
-                />
-              ))}
-              {you.frontLine.length === 0 && <EmptySlots count={4} size="md" />}
-            </div>
-          </div>
-        </div>
+        {/* ═══════ YOUR FIELD ═══════ */}
+        <div className="flex flex-row px-2 py-1 gap-1 items-stretch" style={{ flex: '0 0 auto' }}>
 
-        {/* Your Energy Line */}
-        <div className="px-4 py-1">
-          <div className="flex items-center gap-1 min-h-[60px]">
-            <span className="text-xs text-muted w-16 shrink-0">Energy</span>
-            <div className="flex gap-1 flex-1 justify-center">
-              {you.energyLine.map((card) => (
-                <CardSlot
-                  key={card.instanceId}
-                  card={card}
-                  isYours={true}
-                  isSelected={selectedCard === card.instanceId}
-                  onClick={() => handleFieldCardClick(card.instanceId, true)}
-                  size="sm"
-                  showActions={phase === 'MOVEMENT' && isYourTurn && selectedCard === card.instanceId}
-                  onMoveAction={handleMoveToFront}
-                  moveLabel="↑ Front"
-                />
-              ))}
-              {you.energyLine.length === 0 && <EmptySlots count={4} size="sm" />}
-            </div>
-          </div>
-        </div>
+          {/* Your Life Area (left column) */}
+          <LifeColumn
+            lifeCards={you.lifeCards}
+            label="Your Life"
+            flippable={false}
+            onFlip={() => {}}
+          />
 
-        {/* Your Life Cards */}
-        <div className="px-4 py-1">
-          <div className="flex items-center gap-1 min-h-[36px]">
-            <span className="text-xs text-muted w-16 shrink-0">Life</span>
-            <div className="flex gap-1 flex-1 justify-center">
-              {you.lifeCards.map((lc) => (
-                <div
-                  key={lc.index}
-                  className="w-8 h-11 rounded border-2 border-card-border bg-card-bg flex items-center justify-center text-[8px] font-bold text-muted"
-                >
-                  ?
-                </div>
-              ))}
-              {you.lifeCards.length === 0 && <span className="text-xs text-red-400">No life!</span>}
+          {/* Your center: Front → Energy → AP */}
+          <div className="flex-1 flex flex-col gap-1">
+            {/* Your Front Line */}
+            <div className="flex items-center justify-center gap-1">
+              <span className="text-[10px] text-muted w-8 shrink-0">Front</span>
+              <div className="flex gap-2 justify-center flex-wrap">
+                {you.frontLine.map((card) => (
+                  <CardSlot
+                    key={card.instanceId}
+                    card={card}
+                    isYours={true}
+                    isSelected={selectedCard === card.instanceId}
+                    onClick={() => handleFieldCardClick(card.instanceId, true)}
+                    size="md"
+                    showActions={phase === 'MOVEMENT' && isYourTurn && selectedCard === card.instanceId}
+                    onMoveAction={handleStepToEnergy}
+                    moveLabel="Step →"
+                  />
+                ))}
+                {you.frontLine.length === 0 && <EmptySlots count={4} size="md" />}
+              </div>
             </div>
-          </div>
-        </div>
 
-        {/* Your Info */}
-        <div className="px-4 py-1 flex items-center justify-between text-sm">
-          <div className="flex items-center gap-3">
-            <span className="text-accent-light font-medium">You</span>
-            <div className="flex gap-1">
-              {you.ap.map((ap, i) => (
-                <div
-                  key={i}
-                  className={`w-5 h-7 rounded text-xs flex items-center justify-center font-bold border ${
-                    ap.active ? 'bg-yellow-500/30 border-yellow-500 text-yellow-400' : 'bg-card-bg border-card-border text-muted'
-                  }`}
-                >
-                  AP
-                </div>
-              ))}
+            {/* Your Energy Line */}
+            <div className="flex items-center justify-center gap-1">
+              <span className="text-[10px] text-muted w-8 shrink-0">Engy</span>
+              <div className="flex gap-1 justify-center flex-wrap">
+                {you.energyLine.map((card) => (
+                  <CardSlot
+                    key={card.instanceId}
+                    card={card}
+                    isYours={true}
+                    isSelected={selectedCard === card.instanceId}
+                    onClick={() => handleFieldCardClick(card.instanceId, true)}
+                    size="sm"
+                    showActions={phase === 'MOVEMENT' && isYourTurn && selectedCard === card.instanceId}
+                    onMoveAction={handleMoveToFront}
+                    moveLabel="↑ Front"
+                  />
+                ))}
+                {you.energyLine.length === 0 && <EmptySlots count={4} size="sm" />}
+              </div>
+            </div>
+
+            {/* Your AP */}
+            <div className="flex items-center justify-center gap-1">
+              <span className="text-[10px] text-muted w-8 shrink-0">AP</span>
+              <div className="flex gap-1">
+                {you.ap.map((ap, i) => (
+                  <div
+                    key={i}
+                    className={`w-[40px] h-[56px] rounded border-2 text-[9px] flex items-center justify-center font-bold ${
+                      ap.active ? 'bg-yellow-500/20 border-yellow-500/60 text-yellow-400' : 'bg-card-bg border-card-border text-muted rotate-90'
+                    }`}
+                  >
+                    AP
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          <div className="flex items-center gap-4 text-xs text-muted">
-            <button onClick={() => { setViewingZone('deck'); setViewingPlayer('you'); }} className="hover:text-foreground">
-              Deck: {you.deckCount}
+
+          {/* Your right column: Deck (top) + Sideline + Removal */}
+          <div className="flex flex-col gap-1 w-[72px] items-center">
+            <button onClick={() => { setViewingZone('deck'); setViewingPlayer('you'); }}
+              className="w-[56px] h-[72px] rounded-lg border-2 border-card-border bg-card-bg flex flex-col items-center justify-center text-[9px] text-muted hover:border-accent transition-colors">
+              <span className="font-bold">Deck</span>
+              <span>{you.deckCount}</span>
             </button>
-            <button onClick={() => { setViewingZone('remove'); setViewingPlayer('you'); }} className="hover:text-foreground">
-              Remove: {you.removeArea.length}
+            <button onClick={() => { setViewingZone('sideline'); setViewingPlayer('you'); }}
+              className="w-[56px] h-[48px] rounded-lg border-2 border-dashed border-card-border bg-card-bg/50 flex flex-col items-center justify-center text-[9px] text-muted hover:border-accent transition-colors">
+              <span>Side</span>
+              <span>{you.sidelineArea.length}</span>
             </button>
-            <button onClick={() => { setViewingZone('sideline'); setViewingPlayer('you'); }} className="hover:text-foreground">
-              Sideline: {you.sidelineArea.length}
+            <button onClick={() => { setViewingZone('remove'); setViewingPlayer('you'); }}
+              className="w-[56px] h-[48px] rounded-lg border-2 border-dashed border-card-border bg-card-bg/50 flex flex-col items-center justify-center text-[9px] text-muted hover:border-accent transition-colors">
+              <span>Rmv</span>
+              <span>{you.removeArea.length}</span>
             </button>
           </div>
         </div>
@@ -332,7 +298,6 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
 
       {/* Hand & Actions (bottom) */}
       <div className="border-t border-card-border bg-surface">
-        {/* Action Panel */}
         <ActionPanel
           gameState={gameState}
           sendAction={sendAction}
@@ -341,8 +306,6 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
           onPlayToLine={handlePlayToLine}
           onClearSelection={() => { setSelectedCard(null); setSelectedHandCards([]); }}
         />
-
-        {/* Hand */}
         <HandDisplay
           hand={you.hand}
           selectedCard={selectedCard}
@@ -352,7 +315,6 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
         />
       </div>
 
-      {/* Zone Viewer Modal */}
       {viewingZone && (
         <ZoneInfo
           zone={viewingZone}
@@ -370,6 +332,38 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
   );
 }
 
+/* ── Life Area Column ── */
+function LifeColumn({ lifeCards, label, flippable, onFlip, mirrored }: {
+  lifeCards: LifeCardState[];
+  label: string;
+  flippable: boolean;
+  onFlip: (index: number) => void;
+  mirrored?: boolean;
+}) {
+  return (
+    <div className="flex flex-col items-center gap-[2px] w-[52px] shrink-0">
+      <span className="text-[9px] text-muted font-medium leading-tight">{label}</span>
+      {lifeCards.map((lc) => (
+        <button
+          key={lc.index}
+          onClick={() => flippable && onFlip(lc.index)}
+          className={`w-[36px] h-[28px] rounded border-2 flex items-center justify-center text-[8px] font-bold transition-all ${
+            lc.faceDown === false
+              ? 'border-amber-500/60 bg-amber-500/20 text-amber-400'
+              : flippable
+              ? 'border-red-500 bg-red-500/20 text-red-400 cursor-pointer hover:scale-110 hover:bg-red-500/30 animate-pulse'
+              : 'border-card-border bg-card-bg text-muted cursor-default'
+          }`}
+        >
+          {lc.faceDown === false ? (lc.cardNumber ? lc.cardNumber.slice(-3) : '▲') : `${lc.index + 1}`}
+        </button>
+      ))}
+      {lifeCards.length === 0 && <span className="text-[9px] text-red-400">No life!</span>}
+    </div>
+  );
+}
+
+/* ── Empty card slot placeholders ── */
 function EmptySlots({ count, size }: { count: number; size: 'sm' | 'md' }) {
   return (
     <>
@@ -377,7 +371,7 @@ function EmptySlots({ count, size }: { count: number; size: 'sm' | 'md' }) {
         <div
           key={i}
           className={`border border-dashed border-card-border rounded-lg opacity-30 ${
-            size === 'sm' ? 'w-14 h-12' : 'w-18 h-20'
+            size === 'sm' ? 'w-14 h-[76px]' : 'w-[72px] h-[100px]'
           }`}
         />
       ))}

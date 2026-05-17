@@ -28,8 +28,8 @@ export function CardSlot({
   const isResting = !card.active;
 
   const sizeClasses = size === 'sm'
-    ? 'w-14 h-12 text-[9px]'
-    : 'w-18 h-20 text-[10px]';
+    ? 'w-14 h-[76px] text-[9px]'
+    : 'w-[72px] h-[100px] text-[10px]';
 
   const borderColor = isSelected
     ? 'border-accent ring-2 ring-accent/50'
@@ -37,12 +37,19 @@ export function CardSlot({
     ? 'border-red-500/40'
     : 'border-card-border';
 
+  // Rested cards rotate 90° — container needs extra width to accommodate
+  const wrapperClass = isResting
+    ? size === 'sm'
+      ? 'w-[76px] h-14 flex items-center justify-center'
+      : 'w-[100px] h-[72px] flex items-center justify-center'
+    : '';
+
   return (
-    <div className="relative">
+    <div className={`relative ${wrapperClass}`}>
       <button
         onClick={onClick}
         className={`${sizeClasses} rounded-lg border-2 ${borderColor} overflow-hidden relative transition-all duration-200 hover:scale-105 ${
-          isResting ? 'opacity-70' : ''
+          isResting ? 'rotate-90' : ''
         } ${card.isSite ? 'bg-emerald-900/30' : 'bg-card-bg'}`}
         title={cardData?.name || card.cardNumber}
       >
@@ -64,13 +71,6 @@ export function CardSlot({
             <span className={card.currentBP !== card.baseBP ? 'text-yellow-400' : 'text-white'}>
               {card.currentBP}
             </span>
-          </div>
-        )}
-
-        {/* Resting indicator */}
-        {isResting && (
-          <div className="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-bl text-[6px] text-white flex items-center justify-center">
-            R
           </div>
         )}
 
