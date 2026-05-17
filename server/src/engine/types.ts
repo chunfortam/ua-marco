@@ -82,6 +82,7 @@ export interface FieldCard extends CardInstance {
   tempModifiers: Modifier[];
   usedOncePerTurn: string[];
   isSite: boolean;
+  stayRested: boolean;
 }
 
 export interface APState {

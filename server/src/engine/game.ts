@@ -204,9 +204,11 @@ function beginStartPhase(state: GameState, events: GameEvent[]): void {
 
   state.phase = 'START';
 
-  // Activate all characters
+  // Activate all characters (except those flagged to stay rested by effects)
   for (const card of ps.frontLine) {
-    card.active = true;
+    if (!card.stayRested) {
+      card.active = true;
+    }
     card.attacksRemaining = parseKeywords(getCardData(card.cardNumber)).doubleAttack ? 2 : 1;
     card.blocksRemaining = parseKeywords(getCardData(card.cardNumber)).doubleBlock ? 2 : 1;
     card.usedOncePerTurn = [];
@@ -214,7 +216,9 @@ function beginStartPhase(state: GameState, events: GameEvent[]): void {
     card.currentBP = card.baseBP + card.tempModifiers.reduce((sum, m) => m.type === 'BP_CHANGE' ? sum + m.value : sum, 0);
   }
   for (const card of ps.energyLine) {
-    card.active = true;
+    if (!card.stayRested) {
+      card.active = true;
+    }
     card.usedOncePerTurn = [];
     card.tempModifiers = card.tempModifiers.filter(m => m.expiresAt === 'PERMANENT');
   }

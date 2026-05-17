@@ -65,6 +65,7 @@ export function createFieldCard(cardNumber: string, isSite: boolean = false): Fi
     blocksRemaining: keywords.doubleBlock ? 2 : 1,
     tempModifiers: [],
     usedOncePerTurn: [],
+    stayRested: false,
     isSite,
   };
 }
