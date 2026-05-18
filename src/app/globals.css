@@ -1,26 +1,94 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: #0f0f13;
+  --color-foreground: #e8e8ed;
+  --color-card-bg: #1a1a24;
+  --color-card-border: #2a2a3a;
+  --color-accent: #7c5cbf;
+  --color-accent-light: #9b7dd4;
+  --color-muted: #6b6b7b;
+  --color-surface: #15151f;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Card hover effects */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(124, 92, 191, 0.2);
+}
+
+/* Color indicators */
+.energy-red { color: #ef4444; }
+.energy-blue { color: #3b82f6; }
+.energy-green { color: #22c55e; }
+.energy-yellow { color: #eab308; }
+.energy-purple { color: #a855f7; }
+
+.energy-bg-red { background-color: #ef444420; border-color: #ef4444; }
+.energy-bg-blue { background-color: #3b82f620; border-color: #3b82f6; }
+.energy-bg-green { background-color: #22c55e20; border-color: #22c55e; }
+.energy-bg-yellow { background-color: #eab30820; border-color: #eab308; }
+.energy-bg-purple { background-color: #a855f720; border-color: #a855f7; }
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-card-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* Game animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.25s ease-out;
 }
