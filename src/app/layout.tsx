@@ -77,7 +77,7 @@ export default function RootLayout({
                   All card images and Union Arena trademarks are property of
                   BANDAI. This is a non-official fan project.
                 </span>
-                <span className="text-muted/50">v0.12.0</span>
+                <span className="text-muted/50">v0.13.0</span>
               </div>
             </div>
           </div>

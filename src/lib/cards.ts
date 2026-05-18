@@ -20,6 +20,38 @@ export function getCardByNumber(cardNumber: string): Card | undefined {
   return cards.find((c) => c.cardNumber === cardNumber);
 }
 
+// Lazily-built index: trailing card ID (e.g. "EVA-1-085") → UE card
+let enByTrailing: Map<string, Card> | null = null;
+
+function buildEnIndex(): Map<string, Card> {
+  const map = new Map<string, Card>();
+  for (const c of cards) {
+    if (c.cardNumber.startsWith("UE") && c.cardNumber.includes("/")) {
+      const trailing = c.cardNumber.split("/")[1];
+      if (!map.has(trailing)) map.set(trailing, c);
+    }
+  }
+  return map;
+}
+
+/**
+ * For a JP (UA-prefix) card, look up the English (UE-prefix) equivalent
+ * by matching the trailing card identifier (e.g. EVA-1-085).
+ * Returns undefined when no English version exists.
+ */
+export function getEnglishEquivalent(cardNumber: string): Card | undefined {
+  if (!cardNumber.startsWith("UA") || !cardNumber.includes("/")) return undefined;
+  if (!enByTrailing) enByTrailing = buildEnIndex();
+  const trailing = cardNumber.split("/")[1];
+  return enByTrailing.get(trailing);
+}
+
+/** Returns true if the string contains CJK / Hiragana / Katakana characters. */
+export function hasJapaneseText(text: string | undefined): boolean {
+  if (!text) return false;
+  return /[\u3000-\u9FFF\uF900-\uFAFF]/.test(text);
+}
+
 export function getUniqueSets(): string[] {
   const sets = new Set<string>();
   for (const card of cards) {
