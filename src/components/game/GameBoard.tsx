@@ -8,6 +8,7 @@ import { PhaseBar } from './PhaseBar';
 import { ActionPanel } from './ActionPanel';
 import { GameOverlay } from './GameOverlay';
 import { ZoneInfo } from './ZoneInfo';
+import { CardInspectModal } from './CardInspectModal';
 
 interface GameBoardProps {
   gameState: SanitizedGameState;
@@ -21,6 +22,11 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
   const [selectedHandCards, setSelectedHandCards] = useState<string[]>([]);
   const [viewingZone, setViewingZone] = useState<'life' | 'remove' | 'sideline' | 'deck' | null>(null);
   const [viewingPlayer, setViewingPlayer] = useState<'you' | 'opponent'>('you');
+  const [inspectedCard, setInspectedCard] = useState<string | null>(null);
+
+  const handleInspect = useCallback((cardNumber: string) => {
+    setInspectedCard(cardNumber);
+  }, []);
 
   const { you, opponent, phase, activePlayer, yourKey, pendingAction, turn, winner, winReason } = gameState;
   const isYourTurn = activePlayer === yourKey;
@@ -149,6 +155,7 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
                     isSelected={selectedCard === card.instanceId}
                     onClick={() => handleFieldCardClick(card.instanceId, false)}
                     size="sm"
+                    onInspect={handleInspect}
                   />
                 ))}
                 {opponent.energyLine.length === 0 && <EmptySlots count={4} size="sm" />}
@@ -167,6 +174,7 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
                     isSelected={selectedCard === card.instanceId}
                     onClick={() => handleFieldCardClick(card.instanceId, false)}
                     size="md"
+                    onInspect={handleInspect}
                   />
                 ))}
                 {opponent.frontLine.length === 0 && <EmptySlots count={4} size="md" />}
@@ -230,6 +238,7 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
                     showActions={phase === 'MOVEMENT' && isYourTurn && selectedCard === card.instanceId}
                     onMoveAction={handleStepToEnergy}
                     moveLabel="Step →"
+                    onInspect={handleInspect}
                   />
                 ))}
                 {you.frontLine.length === 0 && <EmptySlots count={4} size="md" />}
@@ -251,6 +260,7 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
                     showActions={phase === 'MOVEMENT' && isYourTurn && selectedCard === card.instanceId}
                     onMoveAction={handleMoveToFront}
                     moveLabel="↑ Front"
+                    onInspect={handleInspect}
                   />
                 ))}
                 {you.energyLine.length === 0 && <EmptySlots count={4} size="sm" />}
@@ -312,8 +322,16 @@ export function GameBoard({ gameState, sendAction, error, clearError }: GameBoar
           selectedCards={selectedHandCards}
           onCardClick={handleHandCardClick}
           pendingDiscard={pendingAction?.type === 'CHOOSE_DISCARD'}
+          onInspect={handleInspect}
         />
       </div>
+
+      {inspectedCard && (
+        <CardInspectModal
+          cardNumber={inspectedCard}
+          onClose={() => setInspectedCard(null)}
+        />
+      )}
 
       {viewingZone && (
         <ZoneInfo

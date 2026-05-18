@@ -12,6 +12,7 @@ interface CardSlotProps {
   showActions?: boolean;
   onMoveAction?: () => void;
   moveLabel?: string;
+  onInspect?: (cardNumber: string) => void;
 }
 
 export function CardSlot({
@@ -23,6 +24,7 @@ export function CardSlot({
   showActions,
   onMoveAction,
   moveLabel,
+  onInspect,
 }: CardSlotProps) {
   const cardData = getCardByNumber(card.cardNumber);
   const isResting = !card.active;
@@ -48,6 +50,10 @@ export function CardSlot({
     <div className={`relative ${wrapperClass}`}>
       <button
         onClick={onClick}
+        onContextMenu={(e) => {
+          e.preventDefault();
+          if (onInspect) onInspect(card.cardNumber);
+        }}
         className={`${sizeClasses} rounded-lg border-2 ${borderColor} overflow-hidden relative transition-all duration-200 hover:scale-105 ${
           isResting ? 'rotate-90' : ''
         } ${card.isSite ? 'bg-emerald-900/30' : 'bg-card-bg'}`}
@@ -78,6 +84,17 @@ export function CardSlot({
         {card.isSite && (
           <div className="absolute top-0 left-0 w-3 h-3 bg-emerald-500 rounded-br text-[6px] text-white flex items-center justify-center">
             S
+          </div>
+        )}
+
+        {/* Inspect icon */}
+        {onInspect && (
+          <div
+            onClick={(e) => { e.stopPropagation(); onInspect(card.cardNumber); }}
+            className="absolute top-0.5 right-0.5 w-4 h-4 bg-black/60 rounded-full flex items-center justify-center text-[8px] text-white opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
+            title="View card details"
+          >
+            &#x1F50D;
           </div>
         )}
       </button>
